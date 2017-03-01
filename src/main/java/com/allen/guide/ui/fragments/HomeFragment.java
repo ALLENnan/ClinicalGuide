@@ -1,20 +1,25 @@
 package com.allen.guide.ui.fragments;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
+import com.allen.guide.base.MVPBaseFragment;
+import com.allen.guide.presenter.imples.HomePresenter;
+import com.allen.guide.ui.interfaces.IHomeView;
 
 /**
  * @author Allen
  * @brief 首页
  * @date 17/2/28
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends MVPBaseFragment<IHomeView, HomePresenter> {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    protected HomePresenter initPresenter() {
+        return null;
+    }
+
+    @Override
+    protected View initView() {
+        return null;
     }
 }

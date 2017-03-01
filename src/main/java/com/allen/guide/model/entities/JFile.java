@@ -3,10 +3,6 @@ package com.allen.guide.model.entities;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Allen on 16/10/5.
- */
-
 public class JFile {
     private int total;
 
