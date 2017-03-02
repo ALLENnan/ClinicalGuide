@@ -1,10 +1,10 @@
 package com.allen.guide.base;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
+import com.allen.guide.net.VolleyManager;
 
 /**
  * @author Allen
@@ -21,22 +21,22 @@ public abstract class MVPBaseFragment<V extends IBaseView, T extends BasePresent
 
         mPresenter = initPresenter();
         mPresenter.attachView((V) this);
+    }
 
-        initView();
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mPresenter.detachView();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return initView();
+        VolleyManager.getInstance(getActivity()).cancel(this);
     }
 
     protected abstract T initPresenter();
 
-    protected abstract View initView();
+    protected abstract void initData();
 }

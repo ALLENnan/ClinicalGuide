@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void initFragments() {
+        Log.d("Allen-----", "MainActivity->initFragments: ");
         mHomeFragment = new HomeFragment();
         mRetrieveFragment = new RetrieveFragment();
         mMeFragment = new MeFragment();

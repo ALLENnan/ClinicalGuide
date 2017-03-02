@@ -80,4 +80,12 @@ public class JFile {
             this.file = file;
         }
     }
+
+    @Override
+    public String toString() {
+        return "JFile{" +
+                "total=" + total +
+                ", rows=" + rows +
+                '}';
+    }
 }

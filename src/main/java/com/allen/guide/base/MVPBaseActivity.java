@@ -3,6 +3,8 @@ package com.allen.guide.base;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.allen.guide.net.VolleyManager;
+
 /**
  * @author Allen
  * @brief MVP父类Activity，子类Activity需要复写抽象方法初始化Presenter
@@ -25,6 +27,7 @@ public abstract class MVPBaseActivity<V extends IBaseView, T extends BasePresent
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.detachView();
+        VolleyManager.getInstance(this).cancel(this);
     }
 
     protected abstract T initPresenter();
