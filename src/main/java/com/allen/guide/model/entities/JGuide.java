@@ -3,11 +3,11 @@ package com.allen.guide.model.entities;
 import java.io.Serializable;
 import java.util.List;
 
-public class JFile {
+public class JGuide {
     private int total;
 
-    private List<File> rows;
-
+    private List<Guide> rows;
+    
     public int getTotal() {
         return total;
     }
@@ -16,15 +16,15 @@ public class JFile {
         this.total = total;
     }
 
-    public List<File> getRows() {
+    public List<Guide> getRows() {
         return rows;
     }
 
-    public void setRows(List<File> rows) {
+    public void setRows(List<Guide> rows) {
         this.rows = rows;
     }
 
-    public static class File implements Serializable {
+    public static class Guide implements Serializable {
         private int id;
         private String title;
         private String author;

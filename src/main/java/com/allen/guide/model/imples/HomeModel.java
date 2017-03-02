@@ -5,7 +5,7 @@ import android.util.Log;
 import com.allen.guide.App;
 import com.allen.guide.config.URLs;
 import com.allen.guide.listener.IGuideListener;
-import com.allen.guide.model.entities.JFile;
+import com.allen.guide.model.entities.JGuide;
 import com.allen.guide.model.interfaces.IHomeModel;
 import com.allen.guide.net.VolleyManager;
 import com.android.volley.Request;
@@ -22,12 +22,12 @@ public class HomeModel implements IHomeModel {
         VolleyManager.RequestBuilder requestBuilder = new VolleyManager.RequestBuilder();
         requestBuilder.setUrl(URLs.index)
                 .setMethod(Request.Method.GET)
-                .setClazz(JFile.class)
+                .setClazz(JGuide.class)
                 .setListener(new Response.Listener() {
                     @Override
                     public void onResponse(Object response) {
-                        Log.d("Allen-----", "HomeModel->onResponse: " + ((JFile) response).toString());
-                        guideListener.onSuccess(((JFile) response).getRows());
+                        Log.d("Allen-----", "HomeModel->onResponse: " + ((JGuide) response).toString());
+                        guideListener.onSuccess(((JGuide) response).getRows());
                         Log.d("Allen-----", "HomeModel->onResponse: ");
                     }
                 })
