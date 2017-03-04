@@ -6,9 +6,9 @@ import android.util.Log;
 import com.allen.guide.App;
 import com.allen.guide.R;
 import com.allen.guide.config.URLs;
-import com.allen.guide.listener.ILoginListener;
-import com.allen.guide.model.entities.JLogin;
-import com.allen.guide.model.interfaces.ILoginModel;
+import com.allen.guide.listener.IRegisterListener;
+import com.allen.guide.model.entities.JRegister;
+import com.allen.guide.model.interfaces.IRegisterModel;
 import com.allen.guide.net.VolleyManager;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -17,23 +17,27 @@ import com.android.volley.VolleyError;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginModel implements ILoginModel {
+public class RegisterModel implements IRegisterModel {
 
-    public LoginModel() {
+    public RegisterModel() {
     }
 
     @Override
-    public void doLogin(String phoneNum, String password, final ILoginListener loginListener) {
+    public void doRegister(String phoneNum, String password, final IRegisterListener registerListener) {
         if (TextUtils.isEmpty(phoneNum)) {
-            loginListener.onPhoneNumError(App.getContext().getString(R.string.msg_phone_blank));
+            registerListener.onPhoneNumError(App.getContext().getString(R.string.msg_phone_blank));
             return;
         }
         if (phoneNum.length() != 11) {
-            loginListener.onPhoneNumError(App.getContext().getString(R.string.msg_phone_error));
+            registerListener.onPhoneNumError(App.getContext().getString(R.string.msg_phone_error));
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            loginListener.onPasswordError(App.getContext().getString(R.string.msg_password_blank));
+            registerListener.onPasswordError(App.getContext().getString(R.string.msg_password_blank));
+            return;
+        }
+        if (password.length() < 6) {
+            registerListener.onPasswordError(App.getContext().getString(R.string.msg_password_count));
             return;
         }
 
@@ -42,25 +46,25 @@ public class LoginModel implements ILoginModel {
         params.put("password", password);
 
         VolleyManager.RequestBuilder requestBuilder = new VolleyManager.RequestBuilder();
-        requestBuilder.setUrl(URLs.LOGIN)
+        requestBuilder.setUrl(URLs.REGISTER)
                 .setMethod(Request.Method.POST)
                 .setParams(params)
-                .setClazz(JLogin.class)
+                .setClazz(JRegister.class)
                 .setListener(new Response.Listener() {
                     @Override
                     public void onResponse(Object response) {
                         Log.d("Allen-----", "LoginModel->onResponse: " + response);
-                        if (((JLogin) response).isUserExist()) {
-                            loginListener.onSuccess();
+                        if (((JRegister) response).isRegistered()) {
+                            registerListener.onSuccess("注册成功");
                         } else {
-                            loginListener.onNetVerifyError("手机号或者密码错误");
+                            registerListener.onError("该手机号已经被注册");
                         }
                     }
                 })
                 .setErrorListener(new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        loginListener.onNetVerifyError("网络错误");
+                        registerListener.onError("网络错误，请重试");
                         Log.d("Allen-----", "HomeModel->onErrorResponse: ");
                     }
                 });

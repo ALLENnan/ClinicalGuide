@@ -1,5 +1,6 @@
 package com.allen.guide.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -17,6 +18,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.allen.guide.R.id.right_tv;
+
 /**
  * @author Allen
  * @brief 登录界面
@@ -26,7 +29,7 @@ public class LoginActivity extends MVPBaseActivity<ILoginView, LoginPresenter> i
 
     @BindView(R.id.title_tv)
     TextView mTitleTv;
-    @BindView(R.id.right_tv)
+    @BindView(right_tv)
     TextView mRightTv;
     @BindView(R.id.etPhoneNum)
     EditText mEtPhoneNum;
@@ -52,10 +55,11 @@ public class LoginActivity extends MVPBaseActivity<ILoginView, LoginPresenter> i
 
     private void initView() {
         mTitleTv.setText(R.string.text_login);
+        mRightTv.setVisibility(View.VISIBLE);
         mRightTv.setText(R.string.text_register);
     }
 
-    @OnClick({R.id.back_btn, R.id.tvForget, R.id.btnLogin, R.id.right_tv})
+    @OnClick({R.id.back_btn, R.id.tvForget, R.id.btnLogin, right_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_btn:
@@ -67,8 +71,8 @@ public class LoginActivity extends MVPBaseActivity<ILoginView, LoginPresenter> i
             case R.id.btnLogin:
                 mPresenter.doLogin(mEtPhoneNum.getText().toString(), mEtPassword.getText().toString());
                 break;
-            case R.id.right_tv:
-//                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            case right_tv:
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
         }
     }
