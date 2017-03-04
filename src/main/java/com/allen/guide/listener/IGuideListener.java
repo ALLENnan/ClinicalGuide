@@ -1,6 +1,6 @@
 package com.allen.guide.listener;
 
-import com.allen.guide.model.entities.JGuide;
+import com.allen.guide.model.entities.GuideBean;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface IGuideListener {
 
-    void onSuccess(List<JGuide.Guide> guideList);
+    void onSuccess(List<GuideBean> guideList);
 
     void onError(String msg);
 }

@@ -1,7 +1,7 @@
 package com.allen.guide.ui.interfaces;
 
 import com.allen.guide.base.IBaseView;
-import com.allen.guide.model.entities.JGuide;
+import com.allen.guide.model.entities.GuideBean;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface IHomeView extends IBaseView {
     
-    void updateGuideList(List<JGuide.Guide> guideList);
+    void updateGuideList(List<GuideBean> guideList);
 }

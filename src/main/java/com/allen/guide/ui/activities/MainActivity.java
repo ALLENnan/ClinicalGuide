@@ -42,7 +42,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+      
         initTabs();
         initFragments();
     }
@@ -129,6 +129,11 @@ public class MainActivity extends FragmentActivity {
                 index = 1;
                 break;
             case R.id.btn_me:
+                //TODO
+                if(true){
+                    startActivity(new Intent(this, LoginActivity.class));
+                    return;
+                }
                 index = 2;
                 break;
         }

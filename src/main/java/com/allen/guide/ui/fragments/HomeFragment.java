@@ -10,7 +10,7 @@ import android.widget.ListView;
 import com.allen.guide.R;
 import com.allen.guide.adapter.GuideListAdapter;
 import com.allen.guide.base.MVPBaseFragment;
-import com.allen.guide.model.entities.JGuide;
+import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.presenter.imples.HomePresenter;
 import com.allen.guide.ui.interfaces.IHomeView;
 
@@ -29,7 +29,7 @@ public class HomeFragment extends MVPBaseFragment<IHomeView, HomePresenter> impl
 
     @BindView(R.id.guide_listView)
     ListView mGuideListView;
-    private List<JGuide.Guide> mGuideList;
+    private List<GuideBean> mGuideList;
     private GuideListAdapter mAdapter;
 
     @Override
@@ -54,7 +54,7 @@ public class HomeFragment extends MVPBaseFragment<IHomeView, HomePresenter> impl
     }
 
     @Override
-    public void updateGuideList(List<JGuide.Guide> guideList) {
+    public void updateGuideList(List<GuideBean> guideList) {
         Log.d("Allen-----", "HomeFragment->updateGuideList: ");
         mGuideList.removeAll(guideList);
         mGuideList.addAll(guideList);

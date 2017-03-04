@@ -20,7 +20,7 @@ public class HomeModel implements IHomeModel {
     @Override
     public void getNetData(final IGuideListener guideListener) {
         VolleyManager.RequestBuilder requestBuilder = new VolleyManager.RequestBuilder();
-        requestBuilder.setUrl(URLs.index)
+        requestBuilder.setUrl(URLs.GUIDE)
                 .setMethod(Request.Method.GET)
                 .setClazz(JGuide.class)
                 .setListener(new Response.Listener() {

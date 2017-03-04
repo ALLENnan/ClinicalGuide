@@ -19,8 +19,6 @@ public abstract class MVPBaseActivity<V extends IBaseView, T extends BasePresent
         
         mPresenter = initPresenter();
         mPresenter.attachView((V) this);
-        
-        initView();
     }
 
     @Override
@@ -31,6 +29,4 @@ public abstract class MVPBaseActivity<V extends IBaseView, T extends BasePresent
     }
 
     protected abstract T initPresenter();
-
-    protected abstract void initView();
 }

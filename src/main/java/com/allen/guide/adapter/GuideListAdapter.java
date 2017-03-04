@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.allen.guide.R;
-import com.allen.guide.model.entities.JGuide;
+import com.allen.guide.model.entities.GuideBean;
 
 import java.util.List;
 
@@ -23,9 +23,9 @@ import butterknife.ButterKnife;
  */
 public class GuideListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
-    private List<JGuide.Guide> mGuideList;
+    private List<GuideBean> mGuideList;
 
-    public GuideListAdapter(Context context, List<JGuide.Guide> guideList) {
+    public GuideListAdapter(Context context, List<GuideBean> guideList) {
         this.mInflater = LayoutInflater.from(context);
         mGuideList = guideList;
     }

@@ -1,11 +1,17 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:windowBackground">@color/app_bg_gray</item>-->
+    </style>
+
+    <style name="app_style_view_split_hori_gray">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1.0px</item>
+        <item name="android:background">#ffdedede</item>
     </style>
 
 </resources>

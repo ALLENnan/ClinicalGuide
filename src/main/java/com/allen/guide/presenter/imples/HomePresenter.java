@@ -2,7 +2,7 @@ package com.allen.guide.presenter.imples;
 
 import com.allen.guide.base.BasePresenter;
 import com.allen.guide.listener.IGuideListener;
-import com.allen.guide.model.entities.JGuide;
+import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.model.imples.HomeModel;
 import com.allen.guide.model.interfaces.IHomeModel;
 import com.allen.guide.presenter.interfaces.IHomePresenter;
@@ -30,7 +30,7 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
     }
 
     @Override
-    public void onSuccess(List<JGuide.Guide> guideList) {
+    public void onSuccess(List<GuideBean> guideList) {
         getView().hideLoading();
         getView().updateGuideList(guideList);
     }

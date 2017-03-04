@@ -49,8 +49,9 @@ public class VolleyManager {
             return params;
         }
 
-        public void setParams(Map<String, String> params) {
+        public RequestBuilder setParams(Map<String, String> params) {
             this.params = params;
+            return this;
         }
 
         public JSONObject getJsonObject() {
