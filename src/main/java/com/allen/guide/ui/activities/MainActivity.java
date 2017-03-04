@@ -16,6 +16,7 @@ import com.allen.guide.R;
 import com.allen.guide.ui.fragments.HomeFragment;
 import com.allen.guide.ui.fragments.MeFragment;
 import com.allen.guide.ui.fragments.RetrieveFragment;
+import com.allen.guide.utils.UserUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +43,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-      
+
         initTabs();
         initFragments();
     }
@@ -129,11 +130,10 @@ public class MainActivity extends FragmentActivity {
                 index = 1;
                 break;
             case R.id.btn_me:
-                //TODO
-                if(true){
+                if (UserUtil.getCurrentUser(this) == null) {
                     startActivity(new Intent(this, LoginActivity.class));
                     return;
-                }
+                } 
                 index = 2;
                 break;
         }

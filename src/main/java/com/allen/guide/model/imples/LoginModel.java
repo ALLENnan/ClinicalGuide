@@ -10,9 +10,11 @@ import com.allen.guide.listener.ILoginListener;
 import com.allen.guide.model.entities.JLogin;
 import com.allen.guide.model.interfaces.ILoginModel;
 import com.allen.guide.net.VolleyManager;
+import com.allen.guide.utils.UserUtil;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +54,9 @@ public class LoginModel implements ILoginModel {
                         Log.d("Allen-----", "LoginModel->onResponse: " + response);
                         if (((JLogin) response).isUserExist()) {
                             loginListener.onSuccess();
+                            //保存当前用户到本地
+                            String jsonStr = new Gson().toJson(((JLogin) response).getUser());
+                            UserUtil.saveCurrentUser(App.getContext(), jsonStr);
                         } else {
                             loginListener.onNetVerifyError("手机号或者密码错误");
                         }
