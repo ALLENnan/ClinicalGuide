@@ -101,6 +101,9 @@ public class GuideModel implements IGuideModel {
 
     @Override
     public void doCollect(GuideBean guideBean, final IBaseListener baseListener) {
+        if (!isLogined()) {
+            return;
+        }
         Map<String, String> params = new HashMap<>();
         params.put(Constants.USER_ID, UserUtil.getCurrentUser(App.getContext()).getId() + "");
         params.put(Constants.GUIDE_ID, guideBean.getId() + "");
@@ -129,5 +132,12 @@ public class GuideModel implements IGuideModel {
                     }
                 });
         add(mBuilder);
+    }
+
+    private boolean isLogined() {
+        if (UserUtil.getCurrentUser(App.getContext()) == null) {
+            return false;
+        }
+        return true;
     }
 }
