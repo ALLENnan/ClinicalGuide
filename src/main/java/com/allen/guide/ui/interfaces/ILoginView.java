@@ -8,7 +8,7 @@ public interface ILoginView extends IBaseView {
 
     void setPasswordError(String msg);
     
-    void setNetVerifyError(String msg);
+    void setVerifyFail();
     
     void navigateToMe();
 }

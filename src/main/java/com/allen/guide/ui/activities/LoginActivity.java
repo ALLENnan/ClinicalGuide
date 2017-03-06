@@ -88,8 +88,8 @@ public class LoginActivity extends MVPBaseActivity<ILoginView, LoginPresenter> i
     }
 
     @Override
-    public void setNetVerifyError(String msg) {
-        ToastUtils.showMessage(this, msg);
+    public void setVerifyFail() {
+        ToastUtils.showMessage(this, "手机号或密码错误");
     }
 
     @Override
@@ -108,7 +108,8 @@ public class LoginActivity extends MVPBaseActivity<ILoginView, LoginPresenter> i
     }
 
     @Override
-    public void showErrorMsg(String msg) {
+    public void showError(String msg) {
+        ToastUtils.showMessage(this, "网络错误");
     }
 
     @Override

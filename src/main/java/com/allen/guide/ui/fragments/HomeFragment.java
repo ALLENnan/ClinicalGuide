@@ -13,6 +13,7 @@ import com.allen.guide.base.MVPBaseFragment;
 import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.presenter.imples.HomePresenter;
 import com.allen.guide.ui.interfaces.IHomeView;
+import com.allen.guide.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,10 +73,10 @@ public class HomeFragment extends MVPBaseFragment<IHomeView, HomePresenter> impl
     }
 
     @Override
-    public void showErrorMsg(String msg) {
-
+    public void showError(String msg) {
+        ToastUtils.showMessage(getActivity(), msg);
     }
-
+    
     @Override
     public void showToast(String msg) {
 

@@ -9,9 +9,7 @@ import java.util.List;
  * @brief
  * @date 17/3/1
  */
-public interface IGuideListener {
+public interface IGuideListener extends IBaseListener{
 
     void onSuccess(List<GuideBean> guideList);
-
-    void onError(String msg);
 }

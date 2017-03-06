@@ -7,5 +7,4 @@ public interface IRegisterView extends IBaseView {
     void setSuccess(String msg);
 
     void setFail(String msg);
-    
 }

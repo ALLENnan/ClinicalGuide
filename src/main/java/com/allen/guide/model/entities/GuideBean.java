@@ -57,4 +57,16 @@ public class GuideBean implements Serializable {
     public void setFile(String file) {
         this.file = file;
     }
+
+    @Override
+    public String toString() {
+        return "GuideBean{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", source='" + source + '\'' +
+                ", desc='" + desc + '\'' +
+                ", file='" + file + '\'' +
+                '}';
+    }
 }

@@ -11,7 +11,7 @@ public interface IBaseView {
 
     void hideLoading();
 
-    void showErrorMsg(String msg);
+    void showError(String msg);
 
     void showToast(String msg);
 }

@@ -36,8 +36,18 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
     }
 
     @Override
+    public void onSuccess(String msg) {
+    }
+
+    @Override
+    public void onFail(String msg) {
+        getView().hideLoading();
+        getView().showToast(msg);
+    }
+
+    @Override
     public void onError(String msg) {
         getView().hideLoading();
-        getView().showErrorMsg(msg);
+        getView().showError(msg);
     }
 }

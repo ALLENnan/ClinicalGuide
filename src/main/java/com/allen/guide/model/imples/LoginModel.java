@@ -53,19 +53,19 @@ public class LoginModel implements ILoginModel {
                     public void onResponse(Object response) {
                         Log.d("Allen-----", "LoginModel->onResponse: " + response);
                         if (((JLogin) response).isUserExist()) {
-                            loginListener.onSuccess();
+                            loginListener.onSuccess("登录成功");
                             //保存当前用户到本地
                             String jsonStr = new Gson().toJson(((JLogin) response).getUser());
                             UserUtil.saveCurrentUser(App.getContext(), jsonStr);
                         } else {
-                            loginListener.onNetVerifyError("手机号或者密码错误");
+                            loginListener.onFail("手机号或者密码错误");
                         }
                     }
                 })
                 .setErrorListener(new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        loginListener.onNetVerifyError("网络错误");
+                        loginListener.onError("网络错误");
                         Log.d("Allen-----", "HomeModel->onErrorResponse: ");
                     }
                 });

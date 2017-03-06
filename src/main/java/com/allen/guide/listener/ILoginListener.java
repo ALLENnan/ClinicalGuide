@@ -5,14 +5,10 @@ package com.allen.guide.listener;
  * @brief
  * @date 17/3/1
  */
-public interface ILoginListener {
-
-    void onSuccess();
+public interface ILoginListener extends IBaseListener {
 
     void onPhoneNumError(String msg);
 
     void onPasswordError(String msg);
-
-    void onNetVerifyError(String msg);
-
+    
 }

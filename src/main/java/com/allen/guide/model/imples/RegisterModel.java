@@ -6,7 +6,7 @@ import android.util.Log;
 import com.allen.guide.App;
 import com.allen.guide.R;
 import com.allen.guide.config.URLs;
-import com.allen.guide.listener.IRegisterListener;
+import com.allen.guide.listener.IBaseListener;
 import com.allen.guide.model.entities.JRegister;
 import com.allen.guide.model.interfaces.IRegisterModel;
 import com.allen.guide.net.VolleyManager;
@@ -23,21 +23,21 @@ public class RegisterModel implements IRegisterModel {
     }
 
     @Override
-    public void doRegister(String phoneNum, String password, final IRegisterListener registerListener) {
+    public void doRegister(String phoneNum, String password, final IBaseListener baseListener) {
         if (TextUtils.isEmpty(phoneNum)) {
-            registerListener.onPhoneNumError(App.getContext().getString(R.string.msg_phone_blank));
+            baseListener.onFail(App.getContext().getString(R.string.msg_phone_blank));
             return;
         }
         if (phoneNum.length() != 11) {
-            registerListener.onPhoneNumError(App.getContext().getString(R.string.msg_phone_error));
+            baseListener.onFail(App.getContext().getString(R.string.msg_phone_error));
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            registerListener.onPasswordError(App.getContext().getString(R.string.msg_password_blank));
+            baseListener.onFail(App.getContext().getString(R.string.msg_password_blank));
             return;
         }
         if (password.length() < 6) {
-            registerListener.onPasswordError(App.getContext().getString(R.string.msg_password_count));
+            baseListener.onFail(App.getContext().getString(R.string.msg_password_count));
             return;
         }
 
@@ -55,16 +55,16 @@ public class RegisterModel implements IRegisterModel {
                     public void onResponse(Object response) {
                         Log.d("Allen-----", "LoginModel->onResponse: " + response);
                         if (((JRegister) response).isRegistered()) {
-                            registerListener.onSuccess("注册成功");
+                            baseListener.onSuccess("注册成功");
                         } else {
-                            registerListener.onError("该手机号已经被注册");
+                            baseListener.onFail("该手机号已经被注册");
                         }
                     }
                 })
                 .setErrorListener(new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        registerListener.onError("网络错误，请重试");
+                        baseListener.onError("网络错误，请重试");
                         Log.d("Allen-----", "HomeModel->onErrorResponse: ");
                     }
                 });

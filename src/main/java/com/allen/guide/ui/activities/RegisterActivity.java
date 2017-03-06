@@ -23,7 +23,7 @@ import butterknife.OnClick;
  * @date 17/3/2
  */
 public class RegisterActivity extends MVPBaseActivity<IRegisterView, RegisterPresenter> implements IRegisterView {
-    
+
     @BindView(R.id.title_tv)
     TextView mTitleTv;
     @BindView(R.id.etPhoneNum)
@@ -62,7 +62,8 @@ public class RegisterActivity extends MVPBaseActivity<IRegisterView, RegisterPre
     }
 
     @Override
-    public void showErrorMsg(String msg) {
+    public void showError(String msg) {
+        ToastUtils.showMessage(this, msg);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.allen.guide.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.allen.guide.R;
+import com.allen.guide.config.Constants;
 import com.allen.guide.model.entities.GuideBean;
+import com.allen.guide.ui.activities.GuideDetailActivity;
 
 import java.util.List;
 
@@ -22,10 +26,12 @@ import butterknife.ButterKnife;
  * @date 17/3/2
  */
 public class GuideListAdapter extends BaseAdapter {
+    private Context mContext;
     private LayoutInflater mInflater;
     private List<GuideBean> mGuideList;
 
     public GuideListAdapter(Context context, List<GuideBean> guideList) {
+        mContext = context;
         this.mInflater = LayoutInflater.from(context);
         mGuideList = guideList;
     }
@@ -61,11 +67,16 @@ public class GuideListAdapter extends BaseAdapter {
         holder.mContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, GuideDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constants.GUIDE_BEAN, mGuideList.get(position));
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
             }
         });
         return convertView;
     }
-    
+
     static class ViewHolder {
         @BindView(R.id.title)
         TextView mTitle;
