@@ -2,17 +2,18 @@ package com.allen.guide.presenter.imples;
 
 import com.allen.guide.base.BasePresenter;
 import com.allen.guide.listener.ILoginListener;
-import com.allen.guide.model.imples.LoginModel;
-import com.allen.guide.model.interfaces.ILoginModel;
+import com.allen.guide.model.imples.UserModel;
+import com.allen.guide.model.interfaces.IUserModel;
 import com.allen.guide.presenter.interfaces.ILoginPresenter;
 import com.allen.guide.ui.interfaces.ILoginView;
 
 public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginPresenter, ILoginListener {
-    private ILoginModel mLoginModel;
+    private IUserModel mUserModel;
 
     public LoginPresenter() {
-        mLoginModel = new LoginModel();
+        mUserModel = UserModel.getInstance();
     }
+
     @Override
     public void onPhoneNumError(String msg) {
         getView().hideLoading();
@@ -28,7 +29,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> implements ILoginP
     @Override
     public void doLogin(String phoneNum, String password) {
         getView().showLoading();
-        mLoginModel.doLogin(phoneNum, password, this);
+        mUserModel.doLogin(phoneNum, password, this);
     }
 
     @Override

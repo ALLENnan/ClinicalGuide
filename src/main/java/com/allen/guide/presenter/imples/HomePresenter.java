@@ -3,8 +3,8 @@ package com.allen.guide.presenter.imples;
 import com.allen.guide.base.BasePresenter;
 import com.allen.guide.listener.IGuideListener;
 import com.allen.guide.model.entities.GuideBean;
-import com.allen.guide.model.imples.HomeModel;
-import com.allen.guide.model.interfaces.IHomeModel;
+import com.allen.guide.model.imples.GuideModel;
+import com.allen.guide.model.interfaces.IGuideModel;
 import com.allen.guide.presenter.interfaces.IHomePresenter;
 import com.allen.guide.ui.interfaces.IHomeView;
 
@@ -17,16 +17,16 @@ import java.util.List;
  */
 
 public class HomePresenter extends BasePresenter<IHomeView> implements IHomePresenter, IGuideListener {
-    private IHomeModel mHomeModel;
+    private IGuideModel mGuideModel;
 
     public HomePresenter() {
-        mHomeModel = new HomeModel();
+        mGuideModel = new GuideModel();
     }
 
     @Override
     public void getNetGuile() {
         getView().showLoading();
-        mHomeModel.getNetData(this);
+        mGuideModel.getGuideList(this);
     }
 
     @Override

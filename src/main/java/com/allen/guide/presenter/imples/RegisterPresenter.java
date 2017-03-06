@@ -2,20 +2,21 @@ package com.allen.guide.presenter.imples;
 
 import com.allen.guide.base.BasePresenter;
 import com.allen.guide.listener.IBaseListener;
-import com.allen.guide.model.imples.RegisterModel;
-import com.allen.guide.model.interfaces.IRegisterModel;
+import com.allen.guide.model.imples.UserModel;
+import com.allen.guide.model.interfaces.IUserModel;
 import com.allen.guide.presenter.interfaces.IRegisterPresenter;
 import com.allen.guide.ui.interfaces.IRegisterView;
 
 public class RegisterPresenter extends BasePresenter<IRegisterView> implements IRegisterPresenter, IBaseListener {
-    private IRegisterModel mRegisterModel;
+    private IUserModel mUserModel;
 
     public RegisterPresenter() {
-        mRegisterModel = new RegisterModel();
+        mUserModel = UserModel.getInstance();
     }
+
     @Override
     public void doRegister(String phoneNum, String password) {
-        mRegisterModel.doRegister(phoneNum, password, this);
+        mUserModel.doRegister(phoneNum, password, this);
     }
 
     @Override

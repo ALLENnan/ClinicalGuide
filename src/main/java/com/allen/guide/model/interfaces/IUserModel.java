@@ -1,8 +1,11 @@
 package com.allen.guide.model.interfaces;
 
+import com.allen.guide.listener.IBaseListener;
 import com.allen.guide.listener.ILoginListener;
 
-public interface ILoginModel {
+public interface IUserModel {
 
     void doLogin(String phoneNum, String password, ILoginListener loginListener);
+
+    void doRegister(String phoneNum, String password, IBaseListener baseListener);
 }
