@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.allen.guide.R;
 import com.allen.guide.base.BaseFragment;
 import com.allen.guide.model.entities.UserBean;
+import com.allen.guide.ui.activities.CollectActivity;
 import com.allen.guide.ui.activities.MainActivity;
 import com.allen.guide.utils.UserUtil;
 import com.bumptech.glide.Glide;
@@ -50,10 +51,21 @@ public class MeFragment extends BaseFragment {
             mNameTv.setText(userbean.getUsername());
         }
     }
-
-    @OnClick(R.id.logOutBtn)
-    public void onClick() {
-        UserUtil.logOut(getActivity());
-        startActivity(new Intent(getActivity(), MainActivity.class));
+    
+    @OnClick({R.id.logOutBtn, R.id.record_tv, R.id.collect_tv, R.id.setting_tv})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.record_tv:
+                break;
+            case R.id.collect_tv:
+                startActivity(new Intent(getActivity(), CollectActivity.class));
+                break;
+            case R.id.setting_tv:
+                break;
+            case R.id.logOutBtn:
+                UserUtil.logOut(getActivity());
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                break;
+        }
     }
 }

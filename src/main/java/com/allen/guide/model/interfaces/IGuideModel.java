@@ -5,8 +5,10 @@ import com.allen.guide.listener.IGuideListener;
 import com.allen.guide.model.entities.GuideBean;
 
 public interface IGuideModel {
-    
+
     void getGuideList(IGuideListener guideListener);
+
+    void getCollectGuide(IGuideListener guideListener);
 
     void doDownload(GuideBean guideBean);
 

@@ -5,8 +5,8 @@ import com.allen.guide.listener.IGuideListener;
 import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.model.imples.GuideModel;
 import com.allen.guide.model.interfaces.IGuideModel;
-import com.allen.guide.presenter.interfaces.IHomePresenter;
-import com.allen.guide.ui.interfaces.IHomeView;
+import com.allen.guide.presenter.interfaces.ICollectPresenter;
+import com.allen.guide.ui.interfaces.ICollectView;
 
 import java.util.List;
 
@@ -16,17 +16,17 @@ import java.util.List;
  * @date 17/3/1
  */
 
-public class HomePresenter extends BasePresenter<IHomeView> implements IHomePresenter, IGuideListener {
+public class CollectPresenter extends BasePresenter<ICollectView> implements ICollectPresenter, IGuideListener {
     private IGuideModel mGuideModel;
 
-    public HomePresenter() {
+    public CollectPresenter() {
         mGuideModel = GuideModel.getInstance();
     }
 
     @Override
-    public void getNetGuile() {
+    public void getCollectGuile() {
         getView().showLoading();
-        mGuideModel.getGuideList(this);
+        mGuideModel.getCollectGuide(this);
     }
 
     @Override

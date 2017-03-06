@@ -12,7 +12,7 @@ public class GuideDetailPresenter extends BasePresenter<IGuideDetailView> implem
     private IGuideModel mGuideModel;
 
     public GuideDetailPresenter() {
-        mGuideModel = new GuideModel();
+        mGuideModel = GuideModel.getInstance();
     }
 
     @Override

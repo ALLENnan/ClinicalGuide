@@ -70,6 +70,29 @@ public class GuideModel implements IGuideModel {
         add(mBuilder);
     }
 
+    @Override
+    public void getCollectGuide(final IGuideListener guideListener) {
+        int userId = UserUtil.getCurrentUser(mContext).getId();
+        String url = URLs.COLLECT + "?userId=" + userId;
+
+        mBuilder.setUrl(url)
+                .setMethod(Request.Method.GET)
+                .setClazz(JGuide.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        guideListener.onSuccess(((JGuide) response).getRows());
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        guideListener.onError("网络错误");
+                    }
+                });
+        add(mBuilder);
+    }
+
 
     @Override
     public void doDownload(GuideBean guideBean) {
