@@ -1,7 +1,7 @@
 package com.allen.guide.model.interfaces;
 
-import com.allen.guide.listener.IBaseListener;
-import com.allen.guide.listener.ILoginListener;
+import com.allen.guide.module.listener.IBaseListener;
+import com.allen.guide.module.listener.ILoginListener;
 
 public interface IUserModel {
 

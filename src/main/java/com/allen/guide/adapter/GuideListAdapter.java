@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.allen.guide.R;
 import com.allen.guide.config.Constants;
 import com.allen.guide.model.entities.GuideBean;
-import com.allen.guide.ui.activities.GuideDetailActivity;
+import com.allen.guide.module.guide_detail.GuideDetailActivity;
 
 import java.util.List;
 
