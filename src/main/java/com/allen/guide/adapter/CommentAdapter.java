@@ -1,8 +1,6 @@
 package com.allen.guide.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,34 +9,27 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.allen.guide.R;
-import com.allen.guide.config.Constants;
-import com.allen.guide.model.entities.GuideBean;
-import com.allen.guide.module.guide_detail.GuideDetailActivity;
+import com.allen.guide.model.entities.CommentBean;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * @author Allen
- * @brief 指南列表adapter
- * @date 17/3/2
- */
-public class GuideListAdapter extends BaseAdapter {
+public class CommentAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
-    private List<GuideBean> mGuideList;
+    private List<CommentBean> mCommentBeanList;
 
-    public GuideListAdapter(Context context, List<GuideBean> guideList) {
+    public CommentAdapter(Context context, List<CommentBean> commentBeanList) {
         mContext = context;
         this.mInflater = LayoutInflater.from(context);
-        mGuideList = guideList;
+        mCommentBeanList = commentBeanList;
     }
 
     @Override
     public int getCount() {
-        return mGuideList.size();
+        return mCommentBeanList.size();
     }
 
     @Override
@@ -55,33 +46,23 @@ public class GuideListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_item_home, null);
+            convertView = mInflater.inflate(R.layout.list_item_comment, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.mTitle.setText(mGuideList.get(position).getTitle());
-        holder.mSource.setText(mGuideList.get(position).getSource());
-
-        holder.mContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, GuideDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(Constants.GUIDE_BEAN, mGuideList.get(position));
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
-            }
-        });
+        holder.mContentTv.setText(mCommentBeanList.get(position).getContent());
+        holder.mDateTv.setText(mCommentBeanList.get(position).getDate());
+        
         return convertView;
     }
 
     static class ViewHolder {
-        @BindView(R.id.title)
-        TextView mTitle;
-        @BindView(R.id.source)
-        TextView mSource;
+        @BindView(R.id.content_tv)
+        TextView mContentTv;
+        @BindView(R.id.date_tv)
+        TextView mDateTv;
         @BindView(R.id.container)
         LinearLayout mContainer;
 

@@ -23,6 +23,7 @@
         <activity android:name=".module.register.RegisterActivity"/>
         <activity android:name=".module.guide_detail.GuideDetailActivity"/>
         <activity android:name=".module.collect.CollectActivity"/>
+        <activity android:name=".module.comment.CommentActivity"/>
     </application>
 
 </manifest>

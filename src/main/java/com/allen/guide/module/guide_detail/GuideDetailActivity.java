@@ -9,6 +9,7 @@ import com.allen.guide.R;
 import com.allen.guide.base.MVPBaseActivity;
 import com.allen.guide.config.Constants;
 import com.allen.guide.model.entities.GuideBean;
+import com.allen.guide.module.comment.CommentActivity;
 import com.allen.guide.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -32,11 +33,11 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_detail);
         ButterKnife.bind(this);
-        getData();
+        getIntentData();
         initView();
     }
 
-    private void getData() {
+    private void getIntentData() {
         Intent intent = getIntent();
         mGuideBean = (GuideBean) intent.getSerializableExtra(Constants.GUIDE_BEAN);
     }
@@ -79,6 +80,11 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
             case R.id.btn_share:
                 break;
             case R.id.btn_comment:
+                Intent intent = new Intent(this, CommentActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constants.GUIDE_ID, mGuideBean.getId());
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
             case R.id.btn_collect:
                 mPresenter.doCollect(mGuideBean);

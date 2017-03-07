@@ -1,17 +1,22 @@
 package com.allen.guide.model.imples;
 
 import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.allen.guide.App;
 import com.allen.guide.config.Constants;
 import com.allen.guide.config.URLs;
-import com.allen.guide.module.listener.IBaseListener;
-import com.allen.guide.module.listener.IGuideListener;
 import com.allen.guide.model.entities.GuideBean;
+import com.allen.guide.model.interfaces.IGuideModel;
 import com.allen.guide.model.port.JGuide;
 import com.allen.guide.model.port.JResult;
-import com.allen.guide.model.interfaces.IGuideModel;
+import com.allen.guide.model.port.Jcomment;
+import com.allen.guide.module.listener.IBaseListener;
+import com.allen.guide.module.listener.ICommentListener;
+import com.allen.guide.module.listener.IGuideListener;
+import com.allen.guide.module.login.LoginActivity;
 import com.allen.guide.net.VolleyManager;
 import com.allen.guide.utils.UserUtil;
 import com.android.volley.Request;
@@ -101,9 +106,8 @@ public class GuideModel implements IGuideModel {
 
     @Override
     public void doCollect(GuideBean guideBean, final IBaseListener baseListener) {
-        if (!isLogined()) {
-            return;
-        }
+        checkLogined();
+
         Map<String, String> params = new HashMap<>();
         params.put(Constants.USER_ID, UserUtil.getCurrentUser(App.getContext()).getId() + "");
         params.put(Constants.GUIDE_ID, guideBean.getId() + "");
@@ -134,10 +138,66 @@ public class GuideModel implements IGuideModel {
         add(mBuilder);
     }
 
-    private boolean isLogined() {
-        if (UserUtil.getCurrentUser(App.getContext()) == null) {
-            return false;
+    @Override
+    public void getComment(int guideId, final ICommentListener commentListener) {
+        String url = URLs.COMMENT + "?guideId=" + guideId;
+
+        mBuilder.setUrl(url)
+                .setMethod(Request.Method.GET)
+                .setClazz(Jcomment.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        commentListener.onSuccess(((Jcomment) response).getRows());
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        commentListener.onError("网络错误");
+                    }
+                });
+        add(mBuilder);
+    }
+
+    @Override
+    public void addComment(int guideId, int userId, String content, final ICommentListener commentListener) {
+        checkLogined();
+
+        if (TextUtils.isEmpty(content)) {
+            commentListener.onFail("评论内容不为空");
+            return;
         }
-        return true;
+
+        Map<String, String> params = new HashMap<>();
+        params.put(Constants.GUIDE_ID, guideId + "");
+        params.put(Constants.USER_ID, userId + "");
+        params.put(Constants.COMMENT_CONTENT, content);
+
+        mBuilder.setUrl(URLs.COMMENT)
+                .setMethod(Request.Method.POST)
+                .setParams(params)
+                .setClazz(Jcomment.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        commentListener.onSuccess(((Jcomment) response).getRows());
+                        commentListener.onSuccess("评论成功");
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        commentListener.onError("网络错误");
+                    }
+                });
+        add(mBuilder);
+    }
+
+    private void checkLogined() {
+        if (UserUtil.getCurrentUser(App.getContext()) == null) {
+            mContext.startActivity(new Intent(mContext, LoginActivity.class));
+            return;
+        }
     }
 }
