@@ -18,6 +18,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
+        <View style="@style/app_style_view_split_hori_gray"/>
+
         <include layout="@layout/bottom_tab_guide_detail"/>
 
     </LinearLayout>
