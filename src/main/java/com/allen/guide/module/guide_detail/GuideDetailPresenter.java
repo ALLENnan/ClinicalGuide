@@ -5,8 +5,9 @@ import com.allen.guide.module.listener.IBaseListener;
 import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.model.imples.GuideModel;
 import com.allen.guide.model.interfaces.IGuideModel;
+import com.allen.guide.module.listener.IDownLoadListener;
 
-public class GuideDetailPresenter extends BasePresenter<IGuideDetailView> implements IGuideDetailPresenter, IBaseListener {
+public class GuideDetailPresenter extends BasePresenter<IGuideDetailView> implements IGuideDetailPresenter, IBaseListener, IDownLoadListener {
     private IGuideModel mGuideModel;
 
     public GuideDetailPresenter() {
@@ -30,11 +31,21 @@ public class GuideDetailPresenter extends BasePresenter<IGuideDetailView> implem
 
     @Override
     public void doDownload(GuideBean guideBean) {
-        
+        mGuideModel.doDownload(guideBean, this);
     }
 
     @Override
     public void doCollect(GuideBean guideBean) {
         mGuideModel.doCollect(guideBean, this);
+    }
+
+    @Override
+    public void onDownLoadSuccess(String msg) {
+        getView().setDownLoadSuccess(msg);
+    }
+
+    @Override
+    public void onDownLoadFail(String msg) {
+        getView().showToast(msg);
     }
 }

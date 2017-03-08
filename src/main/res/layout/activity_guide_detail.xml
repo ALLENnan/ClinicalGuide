@@ -7,22 +7,62 @@
 
     <include layout="@layout/common_toolbar"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/detail_tv"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <View style="@style/app_style_view_split_hori_gray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app_bg_gray"
+                android:orientation="vertical"
+                android:padding="14dp">
 
-        <include layout="@layout/bottom_tab_guide_detail"/>
+                <TextView
+                    android:id="@+id/guide_title_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="ss"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/author_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:textSize="12sp"/>
 
+                <TextView
+                    android:id="@+id/source_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/desc_tv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:lineSpacingExtra="3dp"
+                android:padding="14dp"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <View style="@style/app_style_view_split_hori_gray"/>
+
+    <include layout="@layout/bottom_tab_guide_detail"/>
 
 </LinearLayout>

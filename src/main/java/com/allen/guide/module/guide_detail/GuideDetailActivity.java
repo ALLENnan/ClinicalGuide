@@ -1,6 +1,8 @@
 package com.allen.guide.module.guide_detail;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,20 +14,28 @@ import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.module.comment.CommentActivity;
 import com.allen.guide.utils.ToastUtils;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.allen.guide.R.id.detail_tv;
 
 public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, GuideDetailPresenter> implements IGuideDetailView {
 
     @BindView(R.id.title_tv)
     TextView mTitleTv;
+    @BindView(R.id.guide_title_tv)
+    TextView mGuideTitleTv;
     @BindView(R.id.right_tv)
     TextView mRightTv;
-    @BindView(detail_tv)
-    TextView mDetailTv;
+    @BindView(R.id.author_tv)
+    TextView mAuthorTv;
+    @BindView(R.id.source_tv)
+    TextView mSourceTv;
+    @BindView(R.id.desc_tv)
+    TextView mDescTv;
+    @BindView(R.id.btn_download)
+    TextView mBtnDownload;
     private GuideBean mGuideBean;
 
     @Override
@@ -43,7 +53,16 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
     }
 
     private void initView() {
-        mDetailTv.setText(mGuideBean.toString());
+        mTitleTv.setText("指南详细");
+        mGuideTitleTv.setText(mGuideBean.getTitle());
+        mAuthorTv.setText(mGuideBean.getAuthor());
+        mSourceTv.setText(mGuideBean.getSource());
+        mDescTv.setText(mGuideBean.getDesc());
+
+        File file = new File(Constants.DIR_PATH + mGuideBean.getFile());
+        if (file.exists()) {
+            mBtnDownload.setText("打开");
+        }
     }
 
     @Override
@@ -71,7 +90,7 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
         return new GuideDetailPresenter();
     }
 
-    @OnClick({R.id.back_btn, R.id.btn_share, R.id.btn_comment, R.id.btn_collect})
+    @OnClick({R.id.back_btn, R.id.btn_share, R.id.btn_comment, R.id.btn_collect, R.id.btn_download})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_btn:
@@ -89,6 +108,31 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
             case R.id.btn_collect:
                 mPresenter.doCollect(mGuideBean);
                 break;
+            case R.id.btn_download:
+                if (mBtnDownload.getText().toString().equals("下载")) {
+                    mPresenter.doDownload(mGuideBean);
+                } else {
+                    File file = new File(Constants.DIR_PATH + mGuideBean.getFile());
+                    if (file.exists()) {
+                        Uri uri = Uri.fromFile(file);
+                        Intent intent2 = new Intent(Intent.ACTION_VIEW);
+                        intent2.setDataAndType(uri, "application/pdf");
+                        intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        try {
+                            startActivity(intent2);
+                        } catch (ActivityNotFoundException e) {
+                            System.out.println("打开失败");
+
+                        }
+                    }
+                }
+                break;
         }
+    }
+
+    @Override
+    public void setDownLoadSuccess(String msg) {
+        mBtnDownload.setText("打开");
+        ToastUtils.showMessage(this, msg);
     }
 }

@@ -47,4 +47,16 @@
         android:textColor="@drawable/main_tab_textcolor"
         android:textSize="@dimen/main_bottom_tab"/>
 
+    <TextView
+        android:id="@+id/btn_download"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:onClick="onTabSelect"
+        android:paddingTop="6dip"
+        android:text="下载"
+        android:textColor="@drawable/main_tab_textcolor"
+        android:textSize="@dimen/main_bottom_tab"/>
 </LinearLayout>

@@ -15,8 +15,10 @@ import com.allen.guide.model.port.JResult;
 import com.allen.guide.model.port.Jcomment;
 import com.allen.guide.module.listener.IBaseListener;
 import com.allen.guide.module.listener.ICommentListener;
+import com.allen.guide.module.listener.IDownLoadListener;
 import com.allen.guide.module.listener.IGuideListener;
 import com.allen.guide.module.login.LoginActivity;
+import com.allen.guide.net.DownloadUtil;
 import com.allen.guide.net.VolleyManager;
 import com.allen.guide.utils.UserUtil;
 import com.android.volley.Request;
@@ -98,10 +100,18 @@ public class GuideModel implements IGuideModel {
         add(mBuilder);
     }
 
-
     @Override
-    public void doDownload(GuideBean guideBean) {
+    public void doDownload(GuideBean guideBean, final IDownLoadListener downLoadListener) {
+        checkLogined();
 
+        String fileName = guideBean.getFile();
+        if (fileName != null) {
+            String url = URLs.GUIDE + "?fileName=" + fileName;
+            DownloadUtil downloadUtil = new DownloadUtil();
+            downloadUtil.start(url, downLoadListener);
+        } else {
+            downLoadListener.onDownLoadFail("无此文件");
+        }
     }
 
     @Override
