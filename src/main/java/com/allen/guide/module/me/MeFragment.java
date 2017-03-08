@@ -12,6 +12,7 @@ import com.allen.guide.base.BaseFragment;
 import com.allen.guide.model.entities.UserBean;
 import com.allen.guide.module.collect.CollectActivity;
 import com.allen.guide.module.MainActivity;
+import com.allen.guide.module.others.RecordActivity;
 import com.allen.guide.utils.UserUtil;
 import com.bumptech.glide.Glide;
 
@@ -56,6 +57,7 @@ public class MeFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.record_tv:
+                startActivity(new Intent(getActivity(), RecordActivity.class));
                 break;
             case R.id.collect_tv:
                 startActivity(new Intent(getActivity(), CollectActivity.class));

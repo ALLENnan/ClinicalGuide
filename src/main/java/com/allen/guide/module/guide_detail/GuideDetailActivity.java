@@ -1,8 +1,6 @@
 package com.allen.guide.module.guide_detail;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +10,7 @@ import com.allen.guide.base.MVPBaseActivity;
 import com.allen.guide.config.Constants;
 import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.module.comment.CommentActivity;
+import com.allen.guide.utils.FileUtil;
 import com.allen.guide.utils.ToastUtils;
 
 import java.io.File;
@@ -113,18 +112,7 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
                     mPresenter.doDownload(mGuideBean);
                 } else {
                     File file = new File(Constants.DIR_PATH + mGuideBean.getFile());
-                    if (file.exists()) {
-                        Uri uri = Uri.fromFile(file);
-                        Intent intent2 = new Intent(Intent.ACTION_VIEW);
-                        intent2.setDataAndType(uri, "application/pdf");
-                        intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        try {
-                            startActivity(intent2);
-                        } catch (ActivityNotFoundException e) {
-                            System.out.println("打开失败");
-
-                        }
-                    }
+                    FileUtil.openPDF(this, file);
                 }
                 break;
         }
