@@ -53,4 +53,11 @@ public class FileUtil {
             }
         }
     }
+
+    public static void delFile(String path) {
+        File file = new File(path);
+        if (file.exists() && file.isFile()) {
+            file.delete();
+        }
+    }
 }

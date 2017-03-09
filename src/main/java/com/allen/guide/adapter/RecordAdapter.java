@@ -9,10 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.allen.guide.R;
-import com.allen.guide.config.Constants;
-import com.allen.guide.utils.FileUtil;
 
-import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,13 +52,13 @@ public class RecordAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.mTitle.setText(mFileNameList.get(position));
-        holder.mContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File file = new File(Constants.DIR_PATH + mFileNameList.get(position));
-                FileUtil.openPDF(mContext, file);
-            }
-        });
+//        holder.mContainer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                File file = new File(Constants.DIR_PATH + mFileNameList.get(position));
+//                FileUtil.openPDF(mContext, file);
+//            }
+//        });
         return convertView;
     }
 
