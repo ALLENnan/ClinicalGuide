@@ -56,7 +56,7 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
         mGuideTitleTv.setText(mGuideBean.getTitle());
         mAuthorTv.setText(mGuideBean.getAuthor());
         mSourceTv.setText(mGuideBean.getSource());
-        mDescTv.setText(mGuideBean.getDesc());
+        mDescTv.setText(mGuideBean.getAbstract_cn());
 
         File file = new File(Constants.DIR_PATH + mGuideBean.getFile());
         if (file.exists()) {

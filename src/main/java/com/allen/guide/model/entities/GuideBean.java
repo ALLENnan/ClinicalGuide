@@ -7,7 +7,7 @@ public class GuideBean implements Serializable {
     private String title;
     private String author;
     private String source;
-    private String desc;
+    private String abstract_cn;
     private String file;
 
     public int getId() {
@@ -42,12 +42,12 @@ public class GuideBean implements Serializable {
         this.source = source;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getAbstract_cn() {
+        return abstract_cn;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setAbstract_cn(String abstract_cn) {
+        this.abstract_cn = abstract_cn;
     }
 
     public String getFile() {
@@ -65,7 +65,7 @@ public class GuideBean implements Serializable {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", source='" + source + '\'' +
-                ", desc='" + desc + '\'' +
+                ", abstract_cn='" + abstract_cn + '\'' +
                 ", file='" + file + '\'' +
                 '}';
     }

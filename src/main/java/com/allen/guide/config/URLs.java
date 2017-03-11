@@ -11,4 +11,7 @@ public class URLs {
     public static final String GUIDE = SERVER_IP + "/guide";
     public static final String LOGIN = SERVER_IP + "/login";
     public static final String REGISTER = SERVER_IP + "/register";
+    public static final String COLLECT = SERVER_IP + "/collect";
+    public static final String COMMENT = SERVER_IP + "/comment";
+
 }
