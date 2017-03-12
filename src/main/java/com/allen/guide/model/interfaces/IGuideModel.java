@@ -31,4 +31,11 @@ public interface IGuideModel {
      * @param commentListener
      */
     void addComment(int guideId, int userId, String content, ICommentListener commentListener);
+
+    /**
+     * 检索
+     * @param field 检索对应字段
+     * @param query 检索语句
+     */
+    void retrieveGuides(String field, String query, IGuideListener guideListener);
 }

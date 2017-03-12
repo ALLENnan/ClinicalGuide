@@ -13,4 +13,7 @@ public class Constants {
     public static final String COMMENT_CONTENT = "content";
 
     public static final String DIR_PATH = Environment.getExternalStorageDirectory() + "/guide/";
+
+    public static final String QUERY = "query";
+    public static final String FIELD = "field";
 }

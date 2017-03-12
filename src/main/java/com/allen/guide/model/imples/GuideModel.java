@@ -204,6 +204,35 @@ public class GuideModel implements IGuideModel {
         add(mBuilder);
     }
 
+    @Override
+    public void retrieveGuides(String field, String query, final IGuideListener guideListener) {
+        if (TextUtils.isEmpty(query)) {
+            return;
+        }
+
+        Map<String, String> params = new HashMap<>();
+        params.put(Constants.FIELD, field);
+        params.put(Constants.QUERY, query);
+
+        mBuilder.setUrl(URLs.RETRIEVE)
+                .setMethod(Request.Method.POST)
+                .setParams(params)
+                .setClazz(JGuide.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        guideListener.onSuccess(((JGuide) response).getRows());
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        guideListener.onError("网络错误");
+                    }
+                });
+        add(mBuilder);
+    }
+
     private void checkLogined() {
         if (UserUtil.getCurrentUser(App.getContext()) == null) {
             mContext.startActivity(new Intent(mContext, LoginActivity.class));
