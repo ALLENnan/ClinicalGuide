@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.BounceInterpolator;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.allen.guide.R;
@@ -93,6 +95,13 @@ public class RecordActivity extends BaseActivity {
         });
         mRecordListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
         mRecordListView.setOpenInterpolator(new BounceInterpolator());
+        mRecordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                File file = new File(Constants.DIR_PATH + mFileNameList.get(position));
+                FileUtil.openPDF(mContext, file);
+            }
+        });
     }
 
     private void initData() {
@@ -107,4 +116,5 @@ public class RecordActivity extends BaseActivity {
     }
 
 
+    
 }

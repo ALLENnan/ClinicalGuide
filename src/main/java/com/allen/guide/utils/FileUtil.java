@@ -21,7 +21,7 @@ public class FileUtil {
         List<String> list = new ArrayList<>();
         File f = new File(rootPath);
         if (!f.exists()) {
-            return null;
+            f.mkdirs();
         }
         File[] files = f.listFiles();
         if (files != null) {

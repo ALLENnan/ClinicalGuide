@@ -16,4 +16,7 @@ public class Constants {
 
     public static final String QUERY = "query";
     public static final String FIELD = "field";
+
+    public static String[] RETRIEVE_SRTS = new String[]{"abstract_cn", "title", "author",
+            "source"};
 }

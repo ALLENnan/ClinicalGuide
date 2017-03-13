@@ -28,6 +28,8 @@ import com.android.volley.VolleyError;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class GuideModel implements IGuideModel {
     private Context mContext;
     private static volatile GuideModel sGuideModel;
@@ -107,6 +109,7 @@ public class GuideModel implements IGuideModel {
         String fileName = guideBean.getFile();
         if (fileName != null) {
             String url = URLs.GUIDE + "?fileName=" + fileName;
+            Log.d("Allen-----", "GuideModel->doDownload: " + url);
             DownloadUtil downloadUtil = new DownloadUtil();
             downloadUtil.start(url, downLoadListener);
         } else {
@@ -235,7 +238,9 @@ public class GuideModel implements IGuideModel {
 
     private void checkLogined() {
         if (UserUtil.getCurrentUser(App.getContext()) == null) {
-            mContext.startActivity(new Intent(mContext, LoginActivity.class));
+            Intent intent = new Intent(mContext, LoginActivity.class);
+            intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
             return;
         }
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/container"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@android:color/white"
@@ -10,18 +11,29 @@
         android:layout_height="40dp"
         android:background="@color/app_bg_gray"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="5dp">
+
+        <Spinner
+            android:id="@+id/query_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:entries="@array/retrieve"
+            android:gravity="center"
+            android:textSize="9sp"
+            />
 
         <EditText
             android:id="@+id/query_et"
             android:layout_width="match_parent"
             android:layout_height="40.0dp"
             android:layout_gravity="center"
-            android:layout_margin="2.0dip"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@color/app_bg_gray"
             android:gravity="left|center"
             android:hint="搜索指南"
+            android:singleLine="true"
             android:textColor="@color/app_text_black"
             android:textColorHint="#ffaaaaaa"
             android:textCursorDrawable="@null"
@@ -33,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@mipmap/ic_search"/>
-        
+
     </LinearLayout>
 
     <View style="@style/app_style_view_split_hori_gray"/>

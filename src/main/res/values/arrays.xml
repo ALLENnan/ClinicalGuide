@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="retrieve">
+        <item>全文检索</item>
+        <item>按标题检索 </item>
+        <item>按作者检索</item>
+        <item>按来源检索</item>
+    </string-array>
+</resources>

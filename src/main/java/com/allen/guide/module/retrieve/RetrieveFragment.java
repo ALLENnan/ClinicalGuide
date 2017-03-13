@@ -1,16 +1,21 @@
 package com.allen.guide.module.retrieve;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.allen.guide.R;
 import com.allen.guide.adapter.GuideListAdapter;
 import com.allen.guide.base.MVPBaseFragment;
+import com.allen.guide.config.Constants;
 import com.allen.guide.model.entities.GuideBean;
+import com.allen.guide.utils.BaseUtil;
 import com.allen.guide.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -31,9 +36,12 @@ public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePre
     EditText mQueryEt;
     @BindView(R.id.guide_listView)
     ListView mGuideListView;
+    @BindView(R.id.query_spinner)
+    Spinner mQuerySpinner;
 
     private List<GuideBean> mGuideList;
     private GuideListAdapter mAdapter;
+    private String mField;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,12 +49,6 @@ public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePre
         View view = inflater.inflate(R.layout.fragment_retrieve, container, false);
         ButterKnife.bind(this, view);
         return view;
-    }
-
-
-    @OnClick(R.id.query_iv)
-    public void onClick() {
-        mPresenter.retrieveGuiles("title", mQueryEt.getText().toString());
     }
 
     @Override
@@ -90,5 +92,35 @@ public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePre
         mGuideList = new ArrayList<>();
         mAdapter = new GuideListAdapter(getActivity(), mGuideList);
         mGuideListView.setAdapter(mAdapter);
+
+        mQuerySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+
+                String[] field = Constants.RETRIEVE_SRTS;
+                mField = field[pos];
+                Log.d("Allen-----", "RetrieveFragment->onItemSelected: " + mField);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        mQuerySpinner.setSelection(0, true);
+    }
+
+    @OnClick({R.id.query_iv, R.id.container})
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.query_iv:
+                BaseUtil.hideSoftInput(getActivity());
+                mPresenter.retrieveGuiles(mField, mQueryEt.getText().toString());
+                break;
+            case R.id.container:
+                BaseUtil.hideSoftInput(getActivity());
+                break;
+        }
     }
 }

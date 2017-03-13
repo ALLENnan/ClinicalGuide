@@ -58,7 +58,7 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
         mSourceTv.setText(mGuideBean.getSource());
         mDescTv.setText(mGuideBean.getAbstract_cn());
 
-        File file = new File(Constants.DIR_PATH + mGuideBean.getFile());
+        File file = new File(Constants.DIR_PATH + mGuideBean.getTitle() + ".pdf");
         if (file.exists()) {
             mBtnDownload.setText("打开");
         }
@@ -111,7 +111,7 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
                 if (mBtnDownload.getText().toString().equals("下载")) {
                     mPresenter.doDownload(mGuideBean);
                 } else {
-                    File file = new File(Constants.DIR_PATH + mGuideBean.getFile());
+                    File file = new File(Constants.DIR_PATH + mGuideBean.getTitle() + ".pdf");
                     FileUtil.openPDF(this, file);
                 }
                 break;
@@ -122,5 +122,9 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
     public void setDownLoadSuccess(String msg) {
         mBtnDownload.setText("打开");
         ToastUtils.showMessage(this, msg);
+        //重命名文件
+        File oldFile = new File(Constants.DIR_PATH + mGuideBean.getFile());
+        File newFile = new File(Constants.DIR_PATH + mGuideBean.getTitle() + ".pdf");
+        oldFile.renameTo(newFile);
     }
 }

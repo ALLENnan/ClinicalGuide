@@ -45,7 +45,7 @@ public class RecordAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_item_home, null);
+            convertView = mInflater.inflate(R.layout.list_item_record, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
@@ -65,8 +65,6 @@ public class RecordAdapter extends BaseAdapter {
     static class ViewHolder {
         @BindView(R.id.title)
         TextView mTitle;
-        @BindView(R.id.source)
-        TextView mSource;
         @BindView(R.id.container)
         LinearLayout mContainer;
 
