@@ -10,6 +10,7 @@ import com.allen.guide.base.MVPBaseActivity;
 import com.allen.guide.config.Constants;
 import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.module.comment.CommentActivity;
+import com.allen.guide.utils.BaseUtil;
 import com.allen.guide.utils.FileUtil;
 import com.allen.guide.utils.ToastUtils;
 
@@ -96,6 +97,9 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
                 finish();
                 break;
             case R.id.btn_share:
+                String str = "临床指南：" + "\n《" + mGuideBean.getTitle() + "》\n" + mGuideBean.getAuthor() + "\n"
+                        + mGuideBean.getSource() + "\n\n" + mGuideBean.getAbstract_cn();
+                BaseUtil.shareText(this, str);
                 break;
             case R.id.btn_comment:
                 Intent intent = new Intent(this, CommentActivity.class);
