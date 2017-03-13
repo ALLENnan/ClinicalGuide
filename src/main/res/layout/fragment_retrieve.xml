@@ -23,21 +23,24 @@
             android:textSize="9sp"
             />
 
-        <EditText
-            android:id="@+id/query_et"
+        <AutoCompleteTextView
+            android:id="@+id/query_auto_text"
             android:layout_width="match_parent"
             android:layout_height="40.0dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@color/app_bg_gray"
+            android:completionThreshold="1"
+            android:dropDownHeight="wrap_content"
+            android:dropDownWidth="wrap_content"
             android:gravity="left|center"
             android:hint="搜索指南"
-            android:singleLine="true"
             android:textColor="@color/app_text_black"
             android:textColorHint="#ffaaaaaa"
             android:textCursorDrawable="@null"
             android:textSize="15.0sp"/>
+        />
 
         <ImageView
             android:id="@+id/query_iv"

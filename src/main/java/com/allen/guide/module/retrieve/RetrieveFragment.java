@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -31,13 +32,13 @@ import butterknife.OnClick;
  * @date 17/2/28
  */
 public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePresenter> implements IRetrieveView {
-
-    @BindView(R.id.query_et)
-    EditText mQueryEt;
+    
     @BindView(R.id.guide_listView)
     ListView mGuideListView;
     @BindView(R.id.query_spinner)
     Spinner mQuerySpinner;
+    @BindView(R.id.query_auto_text)
+    AutoCompleteTextView mQueryAutoText;
 
     private List<GuideBean> mGuideList;
     private GuideListAdapter mAdapter;
@@ -108,6 +109,10 @@ public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePre
             }
         });
         mQuerySpinner.setSelection(0, true);
+
+        String [] arr={"指南","干扰素"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,arr);
+        mQueryAutoText.setAdapter(adapter);
     }
 
     @OnClick({R.id.query_iv, R.id.container})
@@ -116,7 +121,7 @@ public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePre
         switch (view.getId()) {
             case R.id.query_iv:
                 BaseUtil.hideSoftInput(getActivity());
-                mPresenter.retrieveGuiles(mField, mQueryEt.getText().toString());
+                mPresenter.retrieveGuiles(mField, mQueryAutoText.getText().toString());
                 break;
             case R.id.container:
                 BaseUtil.hideSoftInput(getActivity());
