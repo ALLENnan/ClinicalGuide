@@ -19,4 +19,6 @@ public class Constants {
 
     public static String[] RETRIEVE_SRTS = new String[]{"abstract_cn", "title", "author",
             "source"};
+
+    public static final String KEY_HISTORY = "key_history";
 }

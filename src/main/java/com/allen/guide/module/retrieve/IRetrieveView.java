@@ -8,4 +8,6 @@ import java.util.List;
 public interface IRetrieveView extends IBaseView {
     
     void updateGuideList(List<GuideBean> guideList);
+    
+    void setKeyWords(List<String> wordList);
 }

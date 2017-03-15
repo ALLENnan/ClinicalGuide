@@ -40,7 +40,6 @@
             android:textColorHint="#ffaaaaaa"
             android:textCursorDrawable="@null"
             android:textSize="15.0sp"/>
-        />
 
         <ImageView
             android:id="@+id/query_iv"
@@ -52,6 +51,9 @@
     </LinearLayout>
 
     <View style="@style/app_style_view_split_hori_gray"/>
+
+    <include
+        layout="@layout/common_search_history"/>
 
     <ListView
         android:id="@+id/guide_listView"

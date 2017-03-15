@@ -1,7 +1,6 @@
 package com.allen.guide.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.allen.guide.net.VolleyManager;
@@ -24,7 +23,7 @@ public abstract class MVPBaseFragment<V extends IBaseView, T extends BasePresent
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initData();
     }

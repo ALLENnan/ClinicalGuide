@@ -14,4 +14,8 @@
     <color name="app_text_black">#323232</color>
     <color name="app_color_gray">#666666</color>
     <color name="app_item_pressed">#dedcdc</color>
+    
+    <color name="list_item_focus">#0a000000</color>
+    <color name="white_alpha_percent_45">#73ffffff</color> 
+    <color name="line_color">#e6e6e6</color>
 </resources>

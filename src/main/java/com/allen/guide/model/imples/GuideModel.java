@@ -12,11 +12,13 @@ import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.model.interfaces.IGuideModel;
 import com.allen.guide.model.port.JGuide;
 import com.allen.guide.model.port.JResult;
+import com.allen.guide.model.port.JWord;
 import com.allen.guide.model.port.Jcomment;
 import com.allen.guide.module.listener.IBaseListener;
 import com.allen.guide.module.listener.ICommentListener;
 import com.allen.guide.module.listener.IDownLoadListener;
 import com.allen.guide.module.listener.IGuideListener;
+import com.allen.guide.module.listener.IWordListener;
 import com.allen.guide.module.login.LoginActivity;
 import com.allen.guide.net.DownloadUtil;
 import com.allen.guide.net.VolleyManager;
@@ -231,6 +233,26 @@ public class GuideModel implements IGuideModel {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         guideListener.onError("网络错误");
+                    }
+                });
+        add(mBuilder);
+    }
+
+    @Override
+    public void getKeyWords(final IWordListener wordListener) {
+        mBuilder.setUrl(URLs.RETRIEVE)
+                .setMethod(Request.Method.GET)
+                .setClazz(JWord.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        wordListener.onSuccess(((JWord) response).getRows());
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        wordListener.onError("网络错误");
                     }
                 });
         add(mBuilder);

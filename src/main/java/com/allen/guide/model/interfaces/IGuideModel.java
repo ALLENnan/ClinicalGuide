@@ -5,6 +5,7 @@ import com.allen.guide.module.listener.ICommentListener;
 import com.allen.guide.module.listener.IDownLoadListener;
 import com.allen.guide.module.listener.IGuideListener;
 import com.allen.guide.model.entities.GuideBean;
+import com.allen.guide.module.listener.IWordListener;
 
 public interface IGuideModel {
 
@@ -34,8 +35,16 @@ public interface IGuideModel {
 
     /**
      * 检索
+     *
      * @param field 检索对应字段
      * @param query 检索语句
      */
     void retrieveGuides(String field, String query, IGuideListener guideListener);
+
+    /**
+     * 获取检索的关键词
+     *
+     * @param wordListener
+     */
+    void getKeyWords(IWordListener wordListener);
 }
