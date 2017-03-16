@@ -20,7 +20,6 @@ import com.allen.guide.adapter.GuideListAdapter;
 import com.allen.guide.base.MVPBaseFragment;
 import com.allen.guide.config.Constants;
 import com.allen.guide.model.entities.GuideBean;
-import com.allen.guide.utils.BaseUtil;
 import com.allen.guide.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -163,10 +162,7 @@ public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePre
                         mSearchHistoryLayout.setVisibility(View.GONE);
                         mGuideListView.setVisibility(View.VISIBLE);
                     }
-                } else {
-//                    mSearchHistoryLayout.setVisibility(View.GONE);
-//                    mGuideListView.setVisibility(View.VISIBLE);
-                }
+                } 
             }
 
             @Override
@@ -199,23 +195,9 @@ public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePre
 
         switch (view.getId()) {
             case R.id.query_iv:
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(mQueryAutoText.getWindowToken(), 0);
-                
-                mPresenter.retrieveGuiles(mField, mQueryAutoText.getText().toString());
-                if (!mHistoryList.contains(mQueryAutoText.getText().toString())) {
-                    mHistoryList.add(mQueryAutoText.getText().toString());
-                }
-                
-                mPresenter.saveHistory(new LinkedHashSet<String>(mHistoryList));
-                mHistoryAdapter.notifyDataSetChanged();
-
-                mSearchHistoryLayout.setVisibility(View.GONE);
-                mGuideListView.setVisibility(View.VISIBLE);
-
+                doQuery();
                 break;
             case R.id.container:
-                BaseUtil.hideSoftInput(getActivity());
                 break;
             case R.id.clear_history_btn:
                 mPresenter.clearHistory();
@@ -223,5 +205,22 @@ public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePre
                 mHistoryAdapter.notifyDataSetChanged();
                 break;
         }
+    }
+
+    private void doQuery() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mQueryAutoText.getWindowToken(), 0);
+
+        String str = mQueryAutoText.getText().toString();
+        mPresenter.retrieveGuiles(mField, str);
+        if (!mHistoryList.contains(str)) {
+            mHistoryList.add(str);
+        }
+
+        mPresenter.saveHistory(new LinkedHashSet<String>(mHistoryList));
+        mHistoryAdapter.notifyDataSetChanged();
+
+        mSearchHistoryLayout.setVisibility(View.GONE);
+        mGuideListView.setVisibility(View.VISIBLE);
     }
 }
