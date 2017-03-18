@@ -14,9 +14,10 @@ import com.allen.guide.model.port.JGuide;
 import com.allen.guide.model.port.JResult;
 import com.allen.guide.model.port.JWord;
 import com.allen.guide.model.port.Jcomment;
-import com.allen.guide.module.listener.IBaseListener;
+import com.allen.guide.module.listener.ICollectListener;
 import com.allen.guide.module.listener.ICommentListener;
 import com.allen.guide.module.listener.IDownLoadListener;
+import com.allen.guide.module.listener.IFavourListener;
 import com.allen.guide.module.listener.IGuideListener;
 import com.allen.guide.module.listener.IWordListener;
 import com.allen.guide.module.login.LoginActivity;
@@ -120,12 +121,11 @@ public class GuideModel implements IGuideModel {
     }
 
     @Override
-    public void doCollect(GuideBean guideBean, final IBaseListener baseListener) {
+    public void doCollect(GuideBean guideBean, final ICollectListener collectListener) {
         checkLogined();
 
         Map<String, String> params = new HashMap<>();
         params.put(Constants.USER_ID, UserUtil.getCurrentUser(App.getContext()).getId() + "");
-        params.put(Constants.GUIDE_ID, guideBean.getId() + "");
         params.put(Constants.GUIDE_ID, guideBean.getId() + "");
 
         mBuilder.setUrl(URLs.COLLECT)
@@ -135,19 +135,36 @@ public class GuideModel implements IGuideModel {
                 .setListener(new Response.Listener() {
                     @Override
                     public void onResponse(Object response) {
-                        Log.d("Allen-----", "LoginModel->onResponse: " + response);
-                        if (((JResult) response).getSucceed()) {
-                            baseListener.onSuccess("收藏成功");
-                        } else {
-                            baseListener.onFail("收藏失败");
-                        }
+                        collectListener.onSuccess(((JResult) response).getSucceed(), null);
                     }
                 })
                 .setErrorListener(new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        baseListener.onError("网络错误");
-                        Log.d("Allen-----", "HomeModel->onErrorResponse: ");
+                        collectListener.onFail("网络错误");
+                    }
+                });
+        add(mBuilder);
+    }
+
+    @Override
+    public void isUserCollect(GuideBean guideBean, final ICollectListener collectListener) {
+        int userId = UserUtil.getCurrentUser(mContext).getId();
+        String url = URLs.COLLECT + "?userId=" + userId + "&guideId=" + guideBean.getId();
+
+        mBuilder.setUrl(url)
+                .setMethod(Request.Method.GET)
+                .setClazz(JResult.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        collectListener.onSuccess(((JResult) response).getSucceed(), null);
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        collectListener.onFail("网络错误");
                     }
                 });
         add(mBuilder);
@@ -253,6 +270,56 @@ public class GuideModel implements IGuideModel {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         wordListener.onError("网络错误");
+                    }
+                });
+        add(mBuilder);
+    }
+
+    @Override
+    public void updateFavour(GuideBean guideBean, final IFavourListener favourListener) {
+        checkLogined();
+
+        Map<String, String> params = new HashMap<>();
+        params.put(Constants.USER_ID, UserUtil.getCurrentUser(App.getContext()).getId() + "");
+        params.put(Constants.GUIDE_ID, guideBean.getId() + "");
+
+        mBuilder.setUrl(URLs.FAVOUR)
+                .setMethod(Request.Method.POST)
+                .setParams(params)
+                .setClazz(JResult.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        favourListener.onSuccess(((JResult) response).getSucceed(), null);
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        favourListener.onFail("网络错误");
+                    }
+                });
+        add(mBuilder);
+    }
+
+    @Override
+    public void isUserFavour(GuideBean guideBean, final IFavourListener favourListener) {
+        int userId = UserUtil.getCurrentUser(mContext).getId();
+        String url = URLs.FAVOUR + "?userId=" + userId + "&guideId=" + guideBean.getId();
+
+        mBuilder.setUrl(url)
+                .setMethod(Request.Method.GET)
+                .setClazz(JResult.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        favourListener.onSuccess(((JResult) response).getSucceed(), null);
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        favourListener.onFail("网络错误");
                     }
                 });
         add(mBuilder);

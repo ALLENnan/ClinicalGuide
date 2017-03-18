@@ -50,6 +50,7 @@ public class CollectActivity extends MVPBaseActivity<ICollectView, CollectPresen
     }
 
     protected void initView() {
+        mTitleTv.setText("我的收藏");
         mGuideList = new ArrayList<>();
         mAdapter = new GuideListAdapter(this, mGuideList);
         mGuideListView.setAdapter(mAdapter);

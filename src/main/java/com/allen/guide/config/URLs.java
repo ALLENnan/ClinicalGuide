@@ -20,4 +20,6 @@ public class URLs {
     public static final String COLLECT = SERVER_IP + "/collect";
     public static final String COMMENT = SERVER_IP + "/comment";
     public static final String RETRIEVE = SERVER_IP + "/retrieve";
+    public static final String FAVOUR = SERVER_IP + "/favour";
+
 }

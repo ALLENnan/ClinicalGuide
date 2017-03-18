@@ -34,4 +34,29 @@
         <item name="android:listSelector">@android:color/transparent</item>
     </style>
 
+    <style name="tab_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@drawable/main_tab_textcolor</item>
+        <item name="android:textSize">@dimen/main_bottom_tab</item>
+    </style>
+
+    <style name="tab_linear_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">4dip</item>
+        <item name="android:paddingTop">6dip</item>
+    </style>
+
+    <style name="tab_image_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
 </resources>

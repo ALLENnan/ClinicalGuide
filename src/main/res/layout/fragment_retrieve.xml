@@ -20,6 +20,7 @@
             android:layout_gravity="center"
             android:entries="@array/retrieve"
             android:gravity="center"
+            android:spinnerMode="dropdown"
             android:textSize="9sp"
             />
 

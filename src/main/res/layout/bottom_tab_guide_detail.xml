@@ -1,62 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="40dp"
+              android:layout_height="46dp"
               android:background="@android:color/white"
               android:gravity="center_vertical"
               android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/btn_share"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:drawablePadding="4dp"
-        android:gravity="center"
-        android:paddingBottom="4dip"
-        android:paddingTop="6dip"
-        android:text="分享"
-        android:textColor="@drawable/main_tab_textcolor"
-        android:textSize="@dimen/main_bottom_tab"/>
+    <LinearLayout
+        android:id="@+id/favour_layout"
+        style="@style/tab_linear_style">
 
-    <TextView
-        android:id="@+id/btn_comment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:drawablePadding="4dp"
-        android:gravity="center"
-        android:paddingBottom="4dip"
-        android:paddingTop="6dip"
-        android:text="评论"
-        android:textColor="@drawable/main_tab_textcolor"
-        android:textSize="@dimen/main_bottom_tab"/>
+        <ImageView
+            android:id="@+id/favour_iv"
+            style="@style/tab_image_style"
+            android:src="@mipmap/good"/>
 
-    <TextView
-        android:id="@+id/btn_collect"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:drawablePadding="4dp"
-        android:gravity="center"
-        android:onClick="onTabSelect"
-        android:paddingTop="6dip"
-        android:text="收藏"
-        android:textColor="@drawable/main_tab_textcolor"
-        android:textSize="@dimen/main_bottom_tab"/>
+        <TextView
+            android:id="@+id/btn_favour"
+            style="@style/tab_text_style"
+            android:text="赞"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/btn_download"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:drawablePadding="4dp"
-        android:gravity="center"
-        android:onClick="onTabSelect"
-        android:paddingTop="6dip"
-        android:text="下载"
-        android:textColor="@drawable/main_tab_textcolor"
-        android:textSize="@dimen/main_bottom_tab"/>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/share_layout"-->
+        <!--style="@style/tab_linear_style">-->
+
+        <!--<ImageView-->
+            <!--style="@style/tab_image_style"-->
+            <!--android:src="@mipmap/ic_launcher"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/btn_share"-->
+            <!--style="@style/tab_text_style"-->
+            <!--android:text="分享"/>-->
+    <!--</LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/comment_layout"
+        style="@style/tab_linear_style">
+
+        <ImageView
+            style="@style/tab_image_style"
+            android:src="@mipmap/ic_comment"/>
+
+        <TextView
+            android:id="@+id/btn_comment"
+            style="@style/tab_text_style"
+            android:text="评论"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/collect_layout"
+        style="@style/tab_linear_style">
+
+        <ImageView
+            android:id="@+id/collect_iv"
+            style="@style/tab_image_style"
+            android:src="@mipmap/collection"/>
+
+        <TextView
+            android:id="@+id/btn_collect"
+            style="@style/tab_text_style"
+            android:text="收藏"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/download_layout"
+        style="@style/tab_linear_style">
+
+        <ImageView
+            style="@style/tab_image_style"
+            android:src="@mipmap/ic_download"/>
+
+        <TextView
+            android:id="@+id/btn_download"
+            style="@style/tab_text_style"
+            android:text="下载"/>
+    </LinearLayout>
 </LinearLayout>

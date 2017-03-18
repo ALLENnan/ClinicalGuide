@@ -1,10 +1,11 @@
 package com.allen.guide.model.interfaces;
 
-import com.allen.guide.module.listener.IBaseListener;
+import com.allen.guide.model.entities.GuideBean;
+import com.allen.guide.module.listener.ICollectListener;
 import com.allen.guide.module.listener.ICommentListener;
 import com.allen.guide.module.listener.IDownLoadListener;
+import com.allen.guide.module.listener.IFavourListener;
 import com.allen.guide.module.listener.IGuideListener;
-import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.module.listener.IWordListener;
 
 public interface IGuideModel {
@@ -15,7 +16,9 @@ public interface IGuideModel {
 
     void doDownload(GuideBean guideBean, IDownLoadListener downLoadListener);
 
-    void doCollect(GuideBean guideBean, IBaseListener baseListener);
+    void doCollect(GuideBean guideBean, ICollectListener collectListener);
+    
+    void isUserCollect(GuideBean guideBean, ICollectListener collectListener);
 
     /**
      * 获取评论
@@ -47,4 +50,18 @@ public interface IGuideModel {
      * @param wordListener
      */
     void getKeyWords(IWordListener wordListener);
+
+    /**
+     * 点赞或取消赞
+     *
+     * @param favourListener
+     */
+    void updateFavour(GuideBean guideBean, IFavourListener favourListener);
+
+    /**
+     * 是否用户点赞
+     * @param guideBean
+     * @param favourListener
+     */
+    void isUserFavour(GuideBean guideBean, IFavourListener favourListener);
 }
