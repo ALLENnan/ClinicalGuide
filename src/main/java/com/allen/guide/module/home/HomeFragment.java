@@ -12,6 +12,9 @@ import com.allen.guide.adapter.GuideListAdapter;
 import com.allen.guide.base.MVPBaseFragment;
 import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.utils.ToastUtils;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,7 @@ public class HomeFragment extends MVPBaseFragment<IHomeView, HomePresenter> impl
 
     @BindView(R.id.guide_listView)
     ListView mGuideListView;
+    SliderLayout mSlider;
     private List<GuideBean> mGuideList;
     private GuideListAdapter mAdapter;
 
@@ -44,12 +48,32 @@ public class HomeFragment extends MVPBaseFragment<IHomeView, HomePresenter> impl
         return view;
     }
 
+    private void initSlider() {
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.silde_view, null);
+        mSlider = (SliderLayout) view.findViewById(R.id.slider);
+        TextSliderView textSliderView = new TextSliderView(getActivity());
+        textSliderView
+                .description("Game of Thrones")
+                .image("http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
+
+        textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+            @Override
+            public void onSliderClick(BaseSliderView slider) {
+                ToastUtils.showMessage(getActivity(),"测试");
+            }
+        });
+        mSlider.addSlider(textSliderView);
+        mGuideListView.addHeaderView(mSlider);
+    }
+
     @Override
     protected void initData() {
         mGuideList = new ArrayList<>();
         mAdapter = new GuideListAdapter(getActivity(), mGuideList);
         mGuideListView.setAdapter(mAdapter);
         mPresenter.getNetGuile();
+
+        initSlider();
     }
 
     @Override
@@ -74,9 +98,15 @@ public class HomeFragment extends MVPBaseFragment<IHomeView, HomePresenter> impl
     public void showError(String msg) {
         ToastUtils.showMessage(getActivity(), msg);
     }
-    
+
     @Override
     public void showToast(String msg) {
 
+    }
+
+    @Override
+    public void onStop() {
+        mSlider.stopAutoCycle();
+        super.onStop();
     }
 }
