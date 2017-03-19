@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
@@ -13,8 +14,10 @@ import com.allen.guide.R;
 import com.allen.guide.adapter.RecordAdapter;
 import com.allen.guide.base.BaseActivity;
 import com.allen.guide.config.Constants;
+import com.allen.guide.module.PdfActivity;
 import com.allen.guide.utils.BaseUtil;
 import com.allen.guide.utils.FileUtil;
+import com.allen.guide.utils.IntentUtil;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
@@ -81,8 +84,13 @@ public class RecordActivity extends BaseActivity {
                 switch (index) {
                     case 0:
                         // open
-                        File file = new File(Constants.DIR_PATH + mFileNameList.get(position));
+                        String temp = mFileNameList.get(position);
+                        String fileName = temp.substring(0, temp.indexOf("."));
+                        Log.d("Allen-----", "RecordActivity->onMenuItemClick: "+fileName);
+                        File file = new File(Constants.DIR_PATH + fileName + ".pdf");
                         FileUtil.openPDF(mContext, file);
+                        IntentUtil.startActivity(mContext, PdfActivity.class, Constants.GUIDE_TITLE, fileName);
+
                         break;
                     case 1:
                         // delete
@@ -116,5 +124,4 @@ public class RecordActivity extends BaseActivity {
     }
 
 
-    
 }

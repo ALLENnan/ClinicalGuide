@@ -17,9 +17,12 @@
 
     <TextView
         android:id="@+id/title_tv"
+        android:layout_toRightOf="@+id/back_btn"
+        android:layout_toLeftOf="@+id/right_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:singleLine="true"
         android:text="@string/app_name"
         android:textColor="@android:color/white"
         android:textSize="19sp" />

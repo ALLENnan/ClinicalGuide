@@ -11,9 +11,10 @@ import com.allen.guide.R;
 import com.allen.guide.base.MVPBaseActivity;
 import com.allen.guide.config.Constants;
 import com.allen.guide.model.entities.GuideBean;
+import com.allen.guide.module.PdfActivity;
 import com.allen.guide.module.comment.CommentActivity;
 import com.allen.guide.utils.BaseUtil;
-import com.allen.guide.utils.FileUtil;
+import com.allen.guide.utils.IntentUtil;
 import com.allen.guide.utils.ToastUtils;
 import com.wx.goodview.GoodView;
 
@@ -188,17 +189,8 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
             case R.id.favour_layout:
                 mPresenter.doFavour(mGuideBean);
                 break;
-//            case R.id.share_layout:
-//                String str = "临床指南：" + "\n《" + mGuideBean.getTitle() + "》\n" + mGuideBean.getAuthor() + "\n"
-//                        + mGuideBean.getSource() + "\n\n" + mGuideBean.getAbstract_cn();
-//                BaseUtil.shareText(this, str);
-//                break;
             case R.id.comment_layout:
-                Intent intent = new Intent(this, CommentActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(Constants.GUIDE_ID, mGuideBean.getId());
-                intent.putExtras(bundle);
-                startActivity(intent);
+                IntentUtil.startActivity(this, CommentActivity.class, Constants.GUIDE_ID, mGuideBean.getId());
                 break;
             case R.id.collect_layout:
                 mPresenter.doCollect(mGuideBean);
@@ -207,8 +199,7 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
                 if (mBtnDownload.getText().toString().equals("下载")) {
                     mPresenter.doDownload(mGuideBean);
                 } else {
-                    File file = new File(Constants.DIR_PATH + mGuideBean.getTitle() + ".pdf");
-                    FileUtil.openPDF(this, file);
+                    IntentUtil.startActivity(this, PdfActivity.class, Constants.GUIDE_TITLE, mGuideBean.getTitle());
                 }
                 break;
         }
