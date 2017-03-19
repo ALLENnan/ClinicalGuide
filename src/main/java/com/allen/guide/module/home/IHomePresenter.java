@@ -8,4 +8,9 @@ package com.allen.guide.module.home;
 public interface IHomePresenter {
     
     void getNetGuile();
+
+    /**
+     * 获取广告栏信息
+     */
+    void getSlide();
 }

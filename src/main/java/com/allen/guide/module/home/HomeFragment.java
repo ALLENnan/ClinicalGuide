@@ -1,5 +1,6 @@
 package com.allen.guide.module.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +11,11 @@ import android.widget.ListView;
 import com.allen.guide.R;
 import com.allen.guide.adapter.GuideListAdapter;
 import com.allen.guide.base.MVPBaseFragment;
+import com.allen.guide.config.Constants;
+import com.allen.guide.config.URLs;
 import com.allen.guide.model.entities.GuideBean;
+import com.allen.guide.model.entities.SlideBean;
+import com.allen.guide.module.guide_detail.GuideDetailActivity;
 import com.allen.guide.utils.ToastUtils;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -51,19 +56,8 @@ public class HomeFragment extends MVPBaseFragment<IHomeView, HomePresenter> impl
     private void initSlider() {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.silde_view, null);
         mSlider = (SliderLayout) view.findViewById(R.id.slider);
-        TextSliderView textSliderView = new TextSliderView(getActivity());
-        textSliderView
-                .description("Game of Thrones")
-                .image("http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
-
-        textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-            @Override
-            public void onSliderClick(BaseSliderView slider) {
-                ToastUtils.showMessage(getActivity(),"测试");
-            }
-        });
-        mSlider.addSlider(textSliderView);
-        mGuideListView.addHeaderView(mSlider);
+        //获取后台的广告栏信息
+        mPresenter.getSlide();
     }
 
     @Override
@@ -82,6 +76,29 @@ public class HomeFragment extends MVPBaseFragment<IHomeView, HomePresenter> impl
         mGuideList.removeAll(guideList);
         mGuideList.addAll(guideList);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showSlide(List<SlideBean> slideList) {
+        for (final SlideBean slideBean : slideList) {
+            TextSliderView textSliderView = new TextSliderView(getActivity());
+            textSliderView
+                    .description(slideBean.getGuideBean().getTitle())
+                    .image(URLs.PIC + slideBean.getPicUrl());
+
+            textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                @Override
+                public void onSliderClick(BaseSliderView slider) {
+                    Intent intent = new Intent(getActivity(), GuideDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constants.GUIDE_BEAN, slideBean.getGuideBean());
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
+                }
+            });
+            mSlider.addSlider(textSliderView);
+        }
+        mGuideListView.addHeaderView(mSlider);
     }
 
     @Override

@@ -21,5 +21,6 @@ public class URLs {
     public static final String COMMENT = SERVER_IP + "/comment";
     public static final String RETRIEVE = SERVER_IP + "/retrieve";
     public static final String FAVOUR = SERVER_IP + "/favour";
-
+    public static final String SLIDE = SERVER_IP + "/slide";
+    public static final String PIC = SERVER_IP + "/pic?pic=";
 }

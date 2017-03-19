@@ -64,4 +64,5 @@ public interface IGuideModel {
      * @param favourListener
      */
     void isUserFavour(GuideBean guideBean, IFavourListener favourListener);
+    
 }

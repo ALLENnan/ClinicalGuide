@@ -1,5 +1,7 @@
 package com.allen.guide.model.interfaces;
 
+import com.allen.guide.module.listener.ISlideListener;
+
 import java.util.Set;
 
 public interface ICommonModel {
@@ -8,4 +10,6 @@ public interface ICommonModel {
     void saveHistory(Set<String> strings);
 
     void clearHistory();
+    
+    void getSlide(ISlideListener slideListener);
 }
