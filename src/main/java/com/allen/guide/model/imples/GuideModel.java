@@ -10,10 +10,12 @@ import com.allen.guide.config.Constants;
 import com.allen.guide.config.URLs;
 import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.model.interfaces.IGuideModel;
+import com.allen.guide.model.port.JCategory;
 import com.allen.guide.model.port.JGuide;
 import com.allen.guide.model.port.JResult;
 import com.allen.guide.model.port.JWord;
 import com.allen.guide.model.port.Jcomment;
+import com.allen.guide.module.listener.ICategoryListener;
 import com.allen.guide.module.listener.ICollectListener;
 import com.allen.guide.module.listener.ICommentListener;
 import com.allen.guide.module.listener.IDownLoadListener;
@@ -305,7 +307,7 @@ public class GuideModel implements IGuideModel {
     @Override
     public void isUserFavour(GuideBean guideBean, final IFavourListener favourListener) {
         checkLogined();
-        
+
         int userId = UserUtil.getCurrentUser(mContext).getId();
         String url = URLs.FAVOUR + "?userId=" + userId + "&guideId=" + guideBean.getId();
 
@@ -322,6 +324,50 @@ public class GuideModel implements IGuideModel {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         favourListener.onFail("网络错误");
+                    }
+                });
+        add(mBuilder);
+    }
+
+    @Override
+    public void getCategory(final ICategoryListener listener) {
+        mBuilder.setUrl(URLs.CATEGORY)
+                .setMethod(Request.Method.GET)
+                .setClazz(JCategory.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        listener.onSuccess(((JCategory) response).getRows());
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onError("网络错误");
+                    }
+                });
+        add(mBuilder);
+    }
+
+    @Override
+    public void getGuideList(String category, final IGuideListener listener) {
+        Map<String, String> params = new HashMap<>();
+        params.put(Constants.PARAM_CATEGORY, category);
+
+        mBuilder.setUrl(URLs.CATEGORY)
+                .setMethod(Request.Method.POST)
+                .setParams(params)
+                .setClazz(JGuide.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        listener.onSuccess(((JGuide) response).getRows());
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onError("网络错误");
                     }
                 });
         add(mBuilder);

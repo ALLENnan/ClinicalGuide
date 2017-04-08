@@ -13,8 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.allen.guide.R;
-import com.allen.guide.module.login.LoginActivity;
+import com.allen.guide.module.category.CategoryFragment;
 import com.allen.guide.module.home.HomeFragment;
+import com.allen.guide.module.login.LoginActivity;
 import com.allen.guide.module.me.MeFragment;
 import com.allen.guide.module.retrieve.RetrieveFragment;
 import com.allen.guide.utils.UserUtil;
@@ -31,10 +32,13 @@ public class MainActivity extends FragmentActivity {
     TextView mBtnRetrieve;
     @BindView(R.id.btn_me)
     TextView mBtnMe;
+    @BindView(R.id.btn_category)
+    TextView mBtnCategory;
     private TextView[] mTabs;
     private Fragment[] mFragmentArray;
     private HomeFragment mHomeFragment;
     private RetrieveFragment mRetrieveFragment;
+    private CategoryFragment mCategoryFragment;
     private MeFragment mMeFragment;
     private int mCurrentTabIndex;
     private boolean is2CallBack = false;
@@ -50,10 +54,11 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void initTabs() {
-        mTabs = new TextView[3];
+        mTabs = new TextView[4];
         mTabs[0] = mBtnHome;
         mTabs[1] = mBtnRetrieve;
-        mTabs[2] = mBtnMe;
+        mTabs[2] = mBtnCategory;
+        mTabs[3] = mBtnMe;
         mTabs[0].setSelected(true);
     }
 
@@ -61,8 +66,9 @@ public class MainActivity extends FragmentActivity {
         Log.d("Allen-----", "MainActivity->initFragments: ");
         mHomeFragment = new HomeFragment();
         mRetrieveFragment = new RetrieveFragment();
+        mCategoryFragment = new CategoryFragment();
         mMeFragment = new MeFragment();
-        mFragmentArray = new Fragment[]{mHomeFragment, mRetrieveFragment, mMeFragment};
+        mFragmentArray = new Fragment[]{mHomeFragment, mRetrieveFragment, mCategoryFragment, mMeFragment};
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mHomeFragment)
                 .show(mHomeFragment).commit();
         mCurrentTabIndex = 0;
@@ -120,7 +126,7 @@ public class MainActivity extends FragmentActivity {
         setTabSelection(0);
     }
 
-    @OnClick({R.id.btn_home, R.id.btn_retrieve, R.id.btn_me})
+    @OnClick({R.id.btn_home, R.id.btn_retrieve, R.id.btn_category, R.id.btn_me})
     public void onClick(View view) {
         int index = 0;
         switch (view.getId()) {
@@ -130,12 +136,15 @@ public class MainActivity extends FragmentActivity {
             case R.id.btn_retrieve:
                 index = 1;
                 break;
+            case R.id.btn_category:
+                index = 2;
+                break;
             case R.id.btn_me:
                 if (UserUtil.getCurrentUser(this) == null) {
                     startActivity(new Intent(this, LoginActivity.class));
                     return;
-                } 
-                index = 2;
+                }
+                index = 3;
                 break;
         }
         setTabSelection(index);

@@ -38,6 +38,21 @@
         android:textSize="@dimen/main_bottom_tab"/>
 
     <TextView
+        android:id="@+id/btn_category"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:drawablePadding="4dp"
+        android:drawableTop="@drawable/main_selector_category"
+        android:gravity="center"
+        android:onClick="onTabSelect"
+        android:paddingBottom="4dip"
+        android:paddingTop="6dip"
+        android:text="分类"
+        android:textColor="@drawable/main_tab_textcolor"
+        android:textSize="@dimen/main_bottom_tab"/>
+
+    <TextView
         android:id="@+id/btn_me"
         android:layout_width="0dp"
         android:layout_height="match_parent"

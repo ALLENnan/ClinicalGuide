@@ -29,7 +29,9 @@
         <activity android:name=".module.collect.CollectActivity"/>
         <activity android:name=".module.comment.CommentActivity"/>
         <activity android:name=".module.others.RecordActivity"/>
-        <activity android:name=".module.PdfActivity">
+        <activity android:name=".module.PdfActivity"/>
+        <activity android:name=".module.category.CategoryDetailActivity">
+
         </activity>
     </application>
 

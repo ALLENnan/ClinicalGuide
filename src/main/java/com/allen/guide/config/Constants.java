@@ -22,4 +22,6 @@ public class Constants {
 
     public static final String KEY_HISTORY = "key_history";
     public static final String GUIDE_TITLE = "title";
+
+    public static final String PARAM_CATEGORY = "category";
 }
