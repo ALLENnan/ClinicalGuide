@@ -13,9 +13,11 @@ import com.allen.guide.config.Constants;
 import com.allen.guide.model.entities.GuideBean;
 import com.allen.guide.module.PdfActivity;
 import com.allen.guide.module.comment.CommentActivity;
+import com.allen.guide.module.login.LoginActivity;
 import com.allen.guide.utils.BaseUtil;
 import com.allen.guide.utils.IntentUtil;
 import com.allen.guide.utils.ToastUtils;
+import com.allen.guide.utils.UserUtil;
 import com.wx.goodview.GoodView;
 
 import java.io.File;
@@ -62,8 +64,15 @@ public class GuideDetailActivity extends MVPBaseActivity<IGuideDetailView, Guide
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_detail);
         ButterKnife.bind(this);
-        getIntentData();
-        initView();
+        
+        if (UserUtil.checkLogined(this)) {
+            getIntentData();
+            initView();
+        } else {
+            finish();
+            Intent intent = new Intent(this, LoginActivity.class);
+            this.startActivity(intent);
+        }
     }
 
     private void getIntentData() {

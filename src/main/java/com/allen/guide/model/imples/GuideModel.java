@@ -1,7 +1,6 @@
 package com.allen.guide.model.imples;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -22,7 +21,6 @@ import com.allen.guide.module.listener.IDownLoadListener;
 import com.allen.guide.module.listener.IFavourListener;
 import com.allen.guide.module.listener.IGuideListener;
 import com.allen.guide.module.listener.IWordListener;
-import com.allen.guide.module.login.LoginActivity;
 import com.allen.guide.net.DownloadUtil;
 import com.allen.guide.net.VolleyManager;
 import com.allen.guide.utils.UserUtil;
@@ -32,8 +30,6 @@ import com.android.volley.VolleyError;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class GuideModel implements IGuideModel {
     private Context mContext;
@@ -109,7 +105,6 @@ public class GuideModel implements IGuideModel {
 
     @Override
     public void doDownload(GuideBean guideBean, final IDownLoadListener downLoadListener) {
-        checkLogined();
 
         String fileName = guideBean.getFile();
         if (fileName != null) {
@@ -124,7 +119,6 @@ public class GuideModel implements IGuideModel {
 
     @Override
     public void doCollect(GuideBean guideBean, final ICollectListener collectListener) {
-        checkLogined();
 
         Map<String, String> params = new HashMap<>();
         params.put(Constants.USER_ID, UserUtil.getCurrentUser(App.getContext()).getId() + "");
@@ -196,7 +190,6 @@ public class GuideModel implements IGuideModel {
 
     @Override
     public void addComment(int guideId, int userId, String content, final ICommentListener commentListener) {
-        checkLogined();
 
         if (TextUtils.isEmpty(content)) {
             commentListener.onFail("评论内容不为空");
@@ -279,7 +272,6 @@ public class GuideModel implements IGuideModel {
 
     @Override
     public void updateFavour(GuideBean guideBean, final IFavourListener favourListener) {
-        checkLogined();
 
         Map<String, String> params = new HashMap<>();
         params.put(Constants.USER_ID, UserUtil.getCurrentUser(App.getContext()).getId() + "");
@@ -306,7 +298,6 @@ public class GuideModel implements IGuideModel {
 
     @Override
     public void isUserFavour(GuideBean guideBean, final IFavourListener favourListener) {
-        checkLogined();
 
         int userId = UserUtil.getCurrentUser(mContext).getId();
         String url = URLs.FAVOUR + "?userId=" + userId + "&guideId=" + guideBean.getId();
@@ -371,14 +362,5 @@ public class GuideModel implements IGuideModel {
                     }
                 });
         add(mBuilder);
-    }
-
-    private void checkLogined() {
-        if (UserUtil.getCurrentUser(App.getContext()) == null) {
-            Intent intent = new Intent(mContext, LoginActivity.class);
-            intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(intent);
-            return;
-        }
     }
 }

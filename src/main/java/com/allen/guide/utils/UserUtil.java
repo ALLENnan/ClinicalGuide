@@ -3,6 +3,7 @@ package com.allen.guide.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.allen.guide.App;
 import com.allen.guide.model.entities.UserBean;
 import com.google.gson.Gson;
 
@@ -49,5 +50,15 @@ public class UserUtil {
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(KEY_USER);
         editor.commit();
+    }
+
+    /**
+     * 检查用户是否登录
+     */
+    public static boolean checkLogined(Context context) {
+        if (UserUtil.getCurrentUser(App.getContext()) == null) {
+            return false;
+        }
+        return true;
     }
 }
