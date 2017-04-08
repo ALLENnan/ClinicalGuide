@@ -304,6 +304,8 @@ public class GuideModel implements IGuideModel {
 
     @Override
     public void isUserFavour(GuideBean guideBean, final IFavourListener favourListener) {
+        checkLogined();
+        
         int userId = UserUtil.getCurrentUser(mContext).getId();
         String url = URLs.FAVOUR + "?userId=" + userId + "&guideId=" + guideBean.getId();
 
