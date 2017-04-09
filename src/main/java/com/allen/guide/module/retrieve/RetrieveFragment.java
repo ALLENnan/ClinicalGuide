@@ -3,6 +3,7 @@ package com.allen.guide.module.retrieve;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -129,6 +130,7 @@ public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePre
 
                 String[] field = Constants.RETRIEVE_SRTS;
                 mField = field[pos];
+                doQuery();
             }
 
             @Override
@@ -212,7 +214,9 @@ public class RetrieveFragment extends MVPBaseFragment<IRetrieveView, RetrievePre
         imm.hideSoftInputFromWindow(mQueryAutoText.getWindowToken(), 0);
 
         String str = mQueryAutoText.getText().toString();
-        mPresenter.retrieveGuiles(mField, str);
+        if(!TextUtils.isEmpty(str)) {
+            mPresenter.retrieveGuiles(mField, str);
+        }
         if (!mHistoryList.contains(str)) {
             mHistoryList.add(str);
         }
