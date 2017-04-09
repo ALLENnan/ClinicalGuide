@@ -3,6 +3,7 @@ package com.allen.guide.module.category;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.allen.guide.R;
 import com.allen.guide.adapter.GuideListAdapter;
@@ -24,6 +25,8 @@ public class CategoryDetailActivity extends BaseActivity {
 
     @BindView(R.id.guide_listView)
     ListView mGuideListView;
+    @BindView(R.id.title_tv)
+    TextView mTitleTv;
     private GuideListAdapter mGuideListAdapter;
     private List<GuideBean> mGuideList;
     private IGuideModel mGuideModel;
@@ -45,6 +48,7 @@ public class CategoryDetailActivity extends BaseActivity {
     }
 
     private void initView() {
+        mTitleTv.setText(category);
         mGuideList = new ArrayList<>();
         mGuideListAdapter = new GuideListAdapter(this, mGuideList);
         mGuideListView.setAdapter(mGuideListAdapter);

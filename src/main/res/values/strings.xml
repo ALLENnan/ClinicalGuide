@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">临床指南</string>
+    <string name="app_name">临床指南检索</string>
     <string name="text_login">登录</string>
     <string name="text_register">注册</string>
     <string name="msg_phone_blank">手机号不能为空</string>
