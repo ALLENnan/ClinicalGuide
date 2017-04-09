@@ -23,4 +23,5 @@ public class URLs {
     public static final String FAVOUR = SERVER_IP + "/favour";
     public static final String SLIDE = SERVER_IP + "/slide";
     public static final String PIC = SERVER_IP + "/pic?pic=";
+    public static final String CATEGORY= SERVER_IP + "/category";
 }
