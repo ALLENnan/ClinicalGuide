@@ -24,17 +24,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="xone"
             android:textColor="@android:color/white"
             android:textSize="15sp"/>
 
     </LinearLayout>
+
+    <include layout="@layout/common_split"/>
+
+    <TextView
+        android:id="@+id/info_tv"
+        style="@style/app_style_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_user_info"
+        android:drawableRight="@mipmap/ic_arrow_right_gray"
+        android:text="个人信息"/>
+
+    <include layout="@layout/common_split"/>
 
     <TextView
         android:id="@+id/record_tv"
         style="@style/app_style_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_record"
         android:drawableRight="@mipmap/ic_arrow_right_gray"
         android:text="下载记录"/>
 
@@ -45,6 +58,7 @@
         style="@style/app_style_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_collect"
         android:drawableRight="@mipmap/ic_arrow_right_gray"
         android:text="我的收藏"/>
 
@@ -55,6 +69,7 @@
         style="@style/app_style_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_setting"
         android:drawableRight="@mipmap/ic_arrow_right_gray"
         android:text="设置"/>
 

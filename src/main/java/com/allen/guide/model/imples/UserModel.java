@@ -6,7 +6,9 @@ import android.util.Log;
 
 import com.allen.guide.App;
 import com.allen.guide.R;
+import com.allen.guide.config.Constants;
 import com.allen.guide.config.URLs;
+import com.allen.guide.model.port.JResult;
 import com.allen.guide.module.listener.IBaseListener;
 import com.allen.guide.module.listener.ILoginListener;
 import com.allen.guide.model.port.JLogin;
@@ -138,6 +140,33 @@ public class UserModel implements IUserModel {
                     public void onErrorResponse(VolleyError error) {
                         baseListener.onError("网络错误，请重试");
                         Log.d("Allen-----", "HomeModel->onErrorResponse: ");
+                    }
+                });
+        add(mBuilder);
+    }
+
+    @Override
+    public void modifyUserInfo(int id, String username, final IBaseListener listener) {
+        Map<String, String> params = new HashMap<>();
+        params.put(Constants.PARAM_USERID, id+"");
+        params.put(Constants.PARAM_USERNAME, username);
+
+        mBuilder.setUrl(URLs.MODIFY)
+                .setMethod(Request.Method.POST)
+                .setParams(params)
+                .setClazz(JResult.class)
+                .setListener(new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        if (((JResult) response).getSucceed()) {
+                            listener.onSuccess("修改成功");
+                        }
+                    }
+                })
+                .setErrorListener(new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onError("网络错误");
                     }
                 });
         add(mBuilder);

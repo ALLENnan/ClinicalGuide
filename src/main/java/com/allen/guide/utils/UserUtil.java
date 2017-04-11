@@ -41,6 +41,18 @@ public class UserUtil {
     }
 
     /**
+     * @param context
+     * @param userBean
+     */
+    public static void saveCurrentUser(Context context, UserBean userBean) {
+        SharedPreferences sp = context.getSharedPreferences(KEY_SP, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Gson gson = new Gson();
+        editor.putString(KEY_USER, gson.toJson(userBean));
+        editor.commit();
+    }
+
+    /**
      * 注销当前用户
      *
      * @param context

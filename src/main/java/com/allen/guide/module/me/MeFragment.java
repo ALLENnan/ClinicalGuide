@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.allen.guide.R;
 import com.allen.guide.base.BaseFragment;
 import com.allen.guide.model.entities.UserBean;
-import com.allen.guide.module.collect.CollectActivity;
 import com.allen.guide.module.MainActivity;
+import com.allen.guide.module.collect.CollectActivity;
 import com.allen.guide.module.others.RecordActivity;
 import com.allen.guide.utils.UserUtil;
 import com.bumptech.glide.Glide;
@@ -43,19 +43,28 @@ public class MeFragment extends BaseFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        initData();
+    }
+
+    @Override
     protected void initData() {
         UserBean userbean = UserUtil.getCurrentUser(getActivity());
         if (userbean == null) {
             return;
         } else {
-            Glide.with(getActivity()).load("http://bmob-cdn-8381.b0.upaiyun.com/2016/12/25/9a47a0f740282288803b84ff269b8242.png").into(mHeadIv);
+            Glide.with(getActivity()).load(R.mipmap.headshot_default).into(mHeadIv);
             mNameTv.setText(userbean.getUsername());
         }
     }
-    
-    @OnClick({R.id.logOutBtn, R.id.record_tv, R.id.collect_tv, R.id.setting_tv})
+
+    @OnClick({R.id.logOutBtn, R.id.info_tv,R.id.record_tv, R.id.collect_tv, R.id.setting_tv})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.info_tv:
+                startActivity(new Intent(getActivity(), UserInfoActivity.class));
+                break;
             case R.id.record_tv:
                 startActivity(new Intent(getActivity(), RecordActivity.class));
                 break;

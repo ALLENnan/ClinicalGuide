@@ -30,7 +30,8 @@
         <activity android:name=".module.comment.CommentActivity"/>
         <activity android:name=".module.others.RecordActivity"/>
         <activity android:name=".module.PdfActivity"/>
-        <activity android:name=".module.category.CategoryDetailActivity">
+        <activity android:name=".module.category.CategoryDetailActivity"/>
+        <activity android:name=".module.me.UserInfoActivity">
 
         </activity>
     </application>

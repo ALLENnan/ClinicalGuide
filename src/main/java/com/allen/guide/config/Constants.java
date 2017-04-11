@@ -24,4 +24,7 @@ public class Constants {
     public static final String GUIDE_TITLE = "title";
 
     public static final String PARAM_CATEGORY = "category";
+    public static final String PARAM_USERNAME = "username";
+    public static final String PARAM_USERID = "userid";
+
 }
