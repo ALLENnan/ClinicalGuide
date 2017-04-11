@@ -63,7 +63,8 @@ public class GuideListAdapter extends BaseAdapter {
         }
         holder.mTitle.setText(mGuideList.get(position).getTitle());
         holder.mSource.setText(mGuideList.get(position).getSource());
-
+        holder.mFavour.setText(mGuideList.get(position).getFavour()+"");
+        
         holder.mContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,12 +77,14 @@ public class GuideListAdapter extends BaseAdapter {
         });
         return convertView;
     }
-
+    
     static class ViewHolder {
         @BindView(R.id.title)
         TextView mTitle;
         @BindView(R.id.source)
         TextView mSource;
+        @BindView(R.id.favour)
+        TextView mFavour;
         @BindView(R.id.container)
         LinearLayout mContainer;
 

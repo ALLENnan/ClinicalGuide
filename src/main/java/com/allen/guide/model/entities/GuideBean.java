@@ -9,6 +9,7 @@ public class GuideBean implements Serializable {
     private String source;
     private String abstract_cn;
     private String file;
+    private int favour;
 
     public int getId() {
         return id;
@@ -58,6 +59,14 @@ public class GuideBean implements Serializable {
         this.file = file;
     }
 
+    public int getFavour() {
+        return favour;
+    }
+
+    public void setFavour(int favour) {
+        this.favour = favour;
+    }
+
     @Override
     public String toString() {
         return "GuideBean{" +
@@ -67,6 +76,7 @@ public class GuideBean implements Serializable {
                 ", source='" + source + '\'' +
                 ", abstract_cn='" + abstract_cn + '\'' +
                 ", file='" + file + '\'' +
+                ", favour=" + favour +
                 '}';
     }
 }

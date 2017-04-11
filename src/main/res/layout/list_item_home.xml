@@ -10,13 +10,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="14dp">
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:textColor="@color/app_text_black"
             android:layout_height="wrap_content"
+            android:textColor="@color/app_text_black"
             android:textSize="18sp"/>
 
 
@@ -26,7 +29,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textSize="12sp"/>
-        
+
+
+        <TextView
+            android:id="@+id/favour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:drawableLeft="@mipmap/good"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="0"
+            android:textSize="12sp"/>
     </LinearLayout>
 
 </LinearLayout>
