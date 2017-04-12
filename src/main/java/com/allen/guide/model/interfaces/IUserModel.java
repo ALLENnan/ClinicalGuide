@@ -9,6 +9,8 @@ public interface IUserModel {
 
     void doRegister(String phoneNum, String password, IBaseListener baseListener);
 
+    boolean checkInput(String phoneNum, String password, IBaseListener baseListener);
+
     /**
      * 修改用户信息
      *

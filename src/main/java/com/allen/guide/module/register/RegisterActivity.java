@@ -1,5 +1,6 @@
 package com.allen.guide.module.register;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,17 +10,13 @@ import android.widget.TextView;
 
 import com.allen.guide.R;
 import com.allen.guide.base.MVPBaseActivity;
+import com.allen.guide.config.Constants;
 import com.allen.guide.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * @author Allen
- * @brief 登录界面
- * @date 17/3/2
- */
 public class RegisterActivity extends MVPBaseActivity<IRegisterView, RegisterPresenter> implements IRegisterView {
 
     @BindView(R.id.title_tv)
@@ -86,7 +83,15 @@ public class RegisterActivity extends MVPBaseActivity<IRegisterView, RegisterPre
                 finish();
                 break;
             case R.id.btnRegister:
-                mPresenter.doRegister(mEtPhoneNum.getText().toString(), mEtPassword.getText().toString());
+                if (mPresenter.isInputLegal(mEtPhoneNum.getText().toString(), mEtPassword.getText().toString())) {
+                    Intent intent = new Intent(this, VerifyActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constants.PARAM_PHONE, mEtPhoneNum.getText().toString());
+                    bundle.putString(Constants.PARAM_PASSWORD, mEtPassword.getText().toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }
                 break;
         }
     }

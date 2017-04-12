@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:clipToPadding="true"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_toolbar"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12.0dip"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="已发送验证码短信到这个号码:"
+            android:textColor="@color/app_color_gray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@id/phone_num_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="+86 xxxxxxxxxxx"
+            android:textColor="@color/app_color_gray"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <View
+            style="@style/app_style_view_split_hori_gray"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/verify_et"
+            android:layout_width="match_parent"
+            android:layout_height="50.0dp"
+            android:layout_margin="2.0dp"
+            android:background="@android:color/white"
+            android:drawableLeft="@mipmap/ic_register_password"
+            android:gravity="left|center"
+            android:hint="填写验证码"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:textColor="@color/app_text_black"
+            android:textColorHint="#ffaaaaaa"
+            android:textCursorDrawable="@null"
+            android:textSize="15.0sp">
+
+        </EditText>
+
+        <View style="@style/app_style_view_split_hori_gray"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/next_btn"
+        android:layout_width="203.0dp"
+        android:layout_height="44.0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20.0dp"
+        android:layout_marginRight="20.0dp"
+        android:layout_marginTop="20.0dp"
+        android:background="@drawable/common_selector_btn"
+        android:gravity="center"
+        android:minHeight="38.0dip"
+        android:text="下一步"
+        android:textColor="@android:color/white"/>
+
+    <ProgressBar
+        android:id="@+id/verify_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        />
+</LinearLayout>

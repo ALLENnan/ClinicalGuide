@@ -99,23 +99,6 @@ public class UserModel implements IUserModel {
 
     @Override
     public void doRegister(String phoneNum, String password, final IBaseListener baseListener) {
-        if (TextUtils.isEmpty(phoneNum)) {
-            baseListener.onFail(App.getContext().getString(R.string.msg_phone_blank));
-            return;
-        }
-        if (phoneNum.length() != 11) {
-            baseListener.onFail(App.getContext().getString(R.string.msg_phone_error));
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-            baseListener.onFail(App.getContext().getString(R.string.msg_password_blank));
-            return;
-        }
-        if (password.length() < 6) {
-            baseListener.onFail(App.getContext().getString(R.string.msg_password_count));
-            return;
-        }
-
         Map<String, String> params = new HashMap<>();
         params.put("phoneNum", phoneNum);
         params.put("password", password);
@@ -146,9 +129,30 @@ public class UserModel implements IUserModel {
     }
 
     @Override
+    public boolean checkInput(String phoneNum, String password, IBaseListener baseListener) {
+        if (TextUtils.isEmpty(phoneNum)) {
+            baseListener.onFail(App.getContext().getString(R.string.msg_phone_blank));
+            return false;
+        }
+        if (phoneNum.length() != 11) {
+            baseListener.onFail(App.getContext().getString(R.string.msg_phone_error));
+            return false;
+        }
+        if (TextUtils.isEmpty(password)) {
+            baseListener.onFail(App.getContext().getString(R.string.msg_password_blank));
+            return false;
+        }
+        if (password.length() < 6) {
+            baseListener.onFail(App.getContext().getString(R.string.msg_password_count));
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public void modifyUserInfo(int id, String username, final IBaseListener listener) {
         Map<String, String> params = new HashMap<>();
-        params.put(Constants.PARAM_USERID, id+"");
+        params.put(Constants.PARAM_USERID, id + "");
         params.put(Constants.PARAM_USERNAME, username);
 
         mBuilder.setUrl(URLs.MODIFY)
