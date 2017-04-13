@@ -27,9 +27,6 @@ import cn.smssdk.SMSSDK;
 public class VerifyActivity extends MVPBaseActivity<IRegisterView, RegisterPresenter> implements IRegisterView {
 
     private static final int SMSDDK_HANDLER = 1;//短信回调
-    private static String appKey = "f3fc6baa9ac4";
-    private static String appSecret = "7f3dedcb36d92deebcb373af921d635a";
-
 
     @BindView(R.id.title_tv)
     TextView mTitleTv;
@@ -60,7 +57,7 @@ public class VerifyActivity extends MVPBaseActivity<IRegisterView, RegisterPrese
     }
 
     private void initSMSSDK() {
-        SMSSDK.initSDK(this, appKey, appSecret);
+        SMSSDK.initSDK(this, Constants.VERIFY_KEY, Constants.VERIFY_SECRET);
         EventHandler eventHandler = new EventHandler() {
             @Override
             public void afterEvent(int event, int result, Object data) {
@@ -145,6 +142,8 @@ public class VerifyActivity extends MVPBaseActivity<IRegisterView, RegisterPrese
                     if (result == SMSSDK.RESULT_COMPLETE) {
                         //验证码验证成功
                         if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                            Toast.makeText(getApplicationContext(), "验证成功",
+                                    Toast.LENGTH_SHORT).show();
                             mPresenter.doRegister(mPhoneNum, mPassword);
                         }
                         //已发送验证码 

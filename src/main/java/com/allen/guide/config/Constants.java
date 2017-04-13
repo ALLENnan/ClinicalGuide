@@ -30,4 +30,6 @@ public class Constants {
     public static final String PARAM_PHONE = "phonenum";
     public static final String PARAM_PASSWORD = "password";
 
+    public static String VERIFY_KEY = "1ce84aae40e1f";
+    public static String VERIFY_SECRET = "de0282f0e9c7f902db16f8055d9b2ec4";
 }

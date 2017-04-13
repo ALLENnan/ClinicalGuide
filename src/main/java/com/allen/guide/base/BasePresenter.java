@@ -23,6 +23,10 @@ public abstract class BasePresenter<V extends IBaseView> {
     }
 
     protected V getView() {
-        return mViewReference.get();
+        if (mViewReference != null) {
+            return mViewReference.get();
+        }else {
+            return null;
+        }
     }
 }
