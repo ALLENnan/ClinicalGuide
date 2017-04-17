@@ -5,34 +5,48 @@
               android:orientation="horizontal"
               android:padding="4dp">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-        android:padding="4dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/head_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_margin="5dp"
+        android:src="@mipmap/headshot_default"/>
+
 
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_marginLeft="5dp"
         android:orientation="vertical"
-        android:padding="5dp"
-        android:layout_marginLeft="5dp">
+        android:padding="2dp">
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Allen"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/content_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="非常好的指南"
             android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/date_tv"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:textSize="10sp"/>
 
     </LinearLayout>

@@ -88,6 +88,7 @@ public class CommentActivity extends MVPBaseActivity<ICommentView, CommentPresen
     public void updataComment(List<CommentBean> commentBeanList) {
         mCommentList.clear();
         mCommentList.addAll(commentBeanList);
+        mTitleTv.setText("评论("+mCommentList.size()+")");
         mAdapter.notifyDataSetChanged();
     }
 

@@ -52,13 +52,16 @@ public class CommentAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.mNameTv.setText(mCommentBeanList.get(position).getUsername());
         holder.mContentTv.setText(mCommentBeanList.get(position).getContent());
         holder.mDateTv.setText(mCommentBeanList.get(position).getDate());
-        
+
         return convertView;
     }
 
     static class ViewHolder {
+        @BindView(R.id.name_tv)
+        TextView mNameTv;
         @BindView(R.id.content_tv)
         TextView mContentTv;
         @BindView(R.id.date_tv)
