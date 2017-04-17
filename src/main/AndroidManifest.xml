@@ -42,6 +42,7 @@
         <activity android:name=".module.category.CategoryDetailActivity"/>
         <activity android:name=".module.me.UserInfoActivity"/>
         <activity android:name=".module.register.VerifyActivity"/>
+        <activity android:name=".module.me.SettingActivity"/>
         
         <activity
             android:name="com.mob.tools.MobUIShell"

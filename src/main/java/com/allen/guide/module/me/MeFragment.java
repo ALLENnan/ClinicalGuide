@@ -72,6 +72,7 @@ public class MeFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), CollectActivity.class));
                 break;
             case R.id.setting_tv:
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.logOutBtn:
                 UserUtil.logOut(getActivity());

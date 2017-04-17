@@ -6,4 +6,7 @@
     <string name="msg_phone_error">手机号格式错误</string>
     <string name="msg_password_blank">密码不能为空</string>
     <string name="msg_password_count">密码不少于6位</string>
+    <string name="msg_about">全称：临床诊疗指南检索\n版本：1.0\n简介：临床诊疗指南检索APP，实现了对临床指南的浏览与检索，使用户可以方便地评论、下载和阅读与目标指南。
+        此外，系统还实现对临床指南的全文检索和关键词提取，从而为用户提供智能化与人性化的检索功能。\n开发者：广外自然语言处理实验室成员</string>
+
 </resources>
